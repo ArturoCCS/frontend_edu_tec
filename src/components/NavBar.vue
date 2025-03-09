@@ -34,7 +34,7 @@
         login
       </v-tab>
       <v-tab
-        href="/"
+        href="/register"
         class="text-none me-4"
       >
         register
