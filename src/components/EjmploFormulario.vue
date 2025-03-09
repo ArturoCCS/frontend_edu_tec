@@ -7,7 +7,7 @@
         prepend-icon="far fa-envelope"
         variant="text"
       >
-        Subscribe to Newsletter
+        Este es un formulario de ejemplo
       </v-btn>
     </div>
     <v-row>
