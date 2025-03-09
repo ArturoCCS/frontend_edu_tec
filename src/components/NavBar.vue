@@ -29,6 +29,7 @@
 const links = [
   { name: "Home", path: "/" },
   { name: "Ejemplo", path: "/ejemplo" },
+  { name: "Ejemplo2", path: "/ejemplo2" },
 ];
 
 const title = import.meta.env.VITE_APP_TITLE;
