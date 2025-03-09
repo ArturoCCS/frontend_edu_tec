@@ -1,12 +1,16 @@
 <template>
   <v-row class="mt-16">
     <v-col cols="5">
-      <h1 class="CRT mt-16">Explorar los libros</h1>
-      <h1 class="CRT">en la plataforma</h1>
+      <h1 class="CRT mt-16">
+        Explorar los libros
+      </h1>
+      <h1 class="CRT">
+        en la plataforma
+      </h1>
       <p class="text-grey CRT">
-        Podras encontrar los mejores libros. <br />
-        sobre bla bla bla bla bla bla bla bla<br />
-        descarga, comenta y puntua<br />
+        Podras encontrar los mejores libros. <br>
+        sobre bla bla bla bla bla bla bla bla<br>
+        descarga, comenta y puntua<br>
         los libros que más te gusten.
       </p>
       <v-btn
@@ -19,11 +23,15 @@
       </v-btn>
     </v-col>
     <v-col cols="7">
-      
-      
-      <h3 class="mt-16">Libros destacados</h3>
+      <h3 class="mt-16">
+        Libros destacados
+      </h3>
       <v-row>
-        <v-col cols="4" v-for="(cli, i) in clients" :key="i">
+        <v-col
+          v-for="(cli, i) in clients"
+          :key="i"
+          cols="4"
+        >
           <div>
             <v-hover v-slot="{ isHovering, props }">
               <v-card
@@ -33,7 +41,10 @@
                 v-bind="props"
                 flat
               >
-                <v-img :src="cli.avatar" cover> </v-img>
+                <v-img
+                  :src="cli.avatar"
+                  cover
+                />
                 <v-expand-transition>
                   <div
                     v-if="isHovering"
@@ -44,7 +55,7 @@
                       icon="fa-solid fa-book"
                       color="black"
                       style="z-index: 9999"
-                    ></v-btn>
+                    />
                   </div>
                 </v-expand-transition>
 
@@ -57,8 +68,6 @@
                   >
                     {{ cli.views }} views
                   </div>
-
-                  
                 </v-card-text>
               </v-card>
             </v-hover>

@@ -1,9 +1,9 @@
 <template>
   <AppHeader />
   <v-container class="">
-  <AreaBooks />
-  <AreaVideos />
-  <AreaTrabajos />
+    <AreaBooks />
+    <AreaVideos />
+    <AreaTrabajos />
   </v-container>
   <AppFooter />
 </template>

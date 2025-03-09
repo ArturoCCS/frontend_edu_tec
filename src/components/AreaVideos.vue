@@ -1,16 +1,31 @@
 <template>
   <v-row class="mt-16">
     <v-col cols="7">
-      <h1 class="CRT mt-16">Area de videos </h1>
+      <h1 class="CRT mt-16">
+        Area de videos
+      </h1>
       <p class="text-grey CRT">
-        lorem ipsum, dolor sit amet consectetur <br />
+        lorem ipsum, dolor sit amet consectetur <br>
         lorem ipsum, dolor sit amet consectetur adipisicing elit.
       </p>
       <v-row>
-        <v-col cols="6" v-for="(cho, i) in chooses" :key="i">
-          <v-card class="mx-auto my-8" max-width="345" color="transparent" flat>
+        <v-col
+          v-for="(cho, i) in chooses"
+          :key="i"
+          cols="6"
+        >
+          <v-card
+            class="mx-auto my-8"
+            max-width="345"
+            color="transparent"
+            flat
+          >
             <v-card-item>
-              <v-icon :class="cho.icon" class="icon" color=""></v-icon>
+              <v-icon
+                :class="cho.icon"
+                class="icon"
+                color=""
+              />
               <v-card-title>
                 {{ cho.title }}
               </v-card-title>
@@ -35,13 +50,13 @@
           margin-left: -100px;
           margin-top: -30px;
         "
-      ></div>
+      />
       <v-img
         src="\sin_foto.jpeg"
         max-height="550"
         contain
         class="mr-12 mt-10"
-      ></v-img>
+      />
     </v-col>
   </v-row>
 </template>

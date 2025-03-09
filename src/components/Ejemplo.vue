@@ -1,10 +1,15 @@
 <template>
-    <h1>{{ title }}</h1>
-    <div v-for="(nombreVariable, i) in comentarios" :key="i">
-        <p class="color">{{ nombreVariable.parrafo }}</p>
-    </div>
-    <Prueba />
-    <EjemploMostrar />
+  <h1>{{ title }}</h1>
+  <div
+    v-for="(nombreVariable, i) in comentarios"
+    :key="i"
+  >
+    <p class="color">
+      {{ nombreVariable.parrafo }}
+    </p>
+  </div>
+  <Prueba />
+  <EjemploMostrar />
 </template>
 
 <script setup>

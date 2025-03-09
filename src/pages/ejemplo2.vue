@@ -1,7 +1,7 @@
 <template>
-    <Ejemplo />
-    <Prueba />
-    <EjemploMostrar />
+  <Ejemplo />
+  <Prueba />
+  <EjemploMostrar />
 </template>
 
 <script setup>

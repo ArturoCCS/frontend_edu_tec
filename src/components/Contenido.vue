@@ -2,8 +2,16 @@
   <v-row class="mb-16 pb-16">
     <v-col cols="12">
       <v-row class="px-16 mt-16">
-        <v-col cols="4" v-for="(mode, i) in moders" :key="i">
-          <v-card color="transparent" flat class="mx-auto">
+        <v-col
+          v-for="(mode, i) in moders"
+          :key="i"
+          cols="4"
+        >
+          <v-card
+            color="transparent"
+            flat
+            class="mx-auto"
+          >
             <v-row>
               <v-col cols="4">
                 <div
@@ -15,7 +23,10 @@
                     opacity: 0.4;
                   "
                 >
-                  <v-img :src="mode.avatar" cover> </v-img>
+                  <v-img
+                    :src="mode.avatar"
+                    cover
+                  />
                 </div>
               </v-col>
               <v-col cols="8">

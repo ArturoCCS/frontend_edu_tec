@@ -1,28 +1,46 @@
 <template>
- <v-app-bar color="#132f53" flat class="px-16">
-      <v-img
-          src="\sin_foto.jpeg"
-          cover
-          max-height="50"
-          max-width="50"
-          min-height="50"
-          min-width="50"
-        >
-      </v-img>
-      <v-spacer></v-spacer>
-      <v-tabs v-model="tab" align-tabs="center" color="white">
-        
-        <v-tab :to="link.path" v-for="(link, i) in links" :key="i" :value="i + 1" class="text-none">
-          {{ link.name }}
-        </v-tab>
-        <v-tab href="/" class="text-none ml-16 mr-4">
+  <v-app-bar
+    color="#132f53"
+    flat
+    class="px-16"
+  >
+    <v-img
+      src="\sin_foto.jpeg"
+      cover
+      max-height="50"
+      max-width="50"
+      min-height="50"
+      min-width="50"
+    />
+    <v-spacer />
+    <v-tabs
+      v-model="tab"
+      align-tabs="center"
+      color="white"
+    >
+      <v-tab
+        v-for="(link, i) in links"
+        :key="i"
+        :to="link.path"
+        :value="i + 1"
+        class="text-none"
+      >
+        {{ link.name }}
+      </v-tab>
+      <v-tab
+        href="/login"
+        class="text-none ml-16 mr-4"
+      >
         login
-        </v-tab>
-        <v-tab href="/" class="text-none me-4">
+      </v-tab>
+      <v-tab
+        href="/"
+        class="text-none me-4"
+      >
         register
-        </v-tab>
-      </v-tabs>
-    </v-app-bar>
+      </v-tab>
+    </v-tabs>
+  </v-app-bar>
 </template>
 
 <script setup>

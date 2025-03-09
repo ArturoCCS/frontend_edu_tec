@@ -14,13 +14,13 @@
               margin-left: 0px;
               margin-top: -30px;
             "
-          ></div>
+          />
           <v-img
             src="\sin_foto.jpeg"
             max-height="600"
             contain
             class="CRT mt-10"
-          ></v-img>
+          />
         </v-col>
         <v-col cols="4">
           <v-img
@@ -29,32 +29,37 @@
             contain
             class="mt-10 ml-n2"
             style="border-radius: 10%"
-          ></v-img>
+          />
           <v-img
             src="\sin_foto.jpeg"
             max-height="400"
             contain
             class="mt-5"
             style="margin-left: -120px; border-radius: 10%"
-          ></v-img>
+          />
         </v-col>
       </v-row>
     </v-col>
     <v-col cols="5">
-      <h2 class="CRT mt-16">Area de trabajos</h2>
+      <h2 class="CRT mt-16">
+        Area de trabajos
+      </h2>
       <p class="text-grey CRT">
-        Crea diferentes espacios de trabajo<br />
-        personales o en equipo<br />
+        Crea diferentes espacios de trabajo<br>
+        personales o en equipo<br>
       </p>
       <v-row>
         <v-col cols="6">
           <v-row class="mt-6">
             <v-col cols="2">
-              <v-icon class="far fa-circle" size="x-small"></v-icon>
+              <v-icon
+                class="far fa-circle"
+                size="x-small"
+              />
             </v-col>
             <v-col cols="10">
               <p class="text-grey">
-                Gestiona tareas<br />
+                Gestiona tareas<br>
               </p>
             </v-col>
           </v-row>
@@ -62,11 +67,14 @@
         <v-col cols="6">
           <v-row class="mt-6">
             <v-col cols="2">
-              <v-icon class="far fa-circle" size="x-small"></v-icon>
+              <v-icon
+                class="far fa-circle"
+                size="x-small"
+              />
             </v-col>
             <v-col cols="10">
               <p class="text-grey">
-                Asigna tareas<br />
+                Asigna tareas<br>
                 dapibus malesuada
               </p>
             </v-col>
@@ -75,11 +83,14 @@
         <v-col cols="6">
           <v-row class="">
             <v-col cols="2">
-              <v-icon class="far fa-circle" size="x-small"></v-icon>
+              <v-icon
+                class="far fa-circle"
+                size="x-small"
+              />
             </v-col>
             <v-col cols="10">
               <p class="text-grey">
-                Bla bla<br />
+                Bla bla<br>
                 bla bal
               </p>
             </v-col>
@@ -88,11 +99,14 @@
         <v-col cols="6">
           <v-row class="">
             <v-col cols="2">
-              <v-icon class="far fa-circle" size="x-small"></v-icon>
+              <v-icon
+                class="far fa-circle"
+                size="x-small"
+              />
             </v-col>
             <v-col cols="10">
               <p class="text-grey">
-                Bla bla<br />
+                Bla bla<br>
                 bla bal
               </p>
             </v-col>

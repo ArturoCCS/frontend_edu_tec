@@ -1,9 +1,11 @@
 <template>
   <v-footer class="">
-    <v-row justify="center" no-gutters class="mt-16">
-      <v-col cols="5">
-        
-      </v-col>
+    <v-row
+      justify="center"
+      no-gutters
+      class="mt-16"
+    >
+      <v-col cols="5" />
       <v-col cols="6">
         <v-img
           src="\petirrojo.jpg"
@@ -13,8 +15,7 @@
           min-height="50"
           min-width="50"
           style="margin-top: -150px; margin-left: 50%; margin-bottom: 25px"
-        >
-        </v-img>
+        />
       </v-col>
       <v-col cols="12">
         <h1 style="color: #344d43; margin-left: 50px; margin-top: -100px">
@@ -37,36 +38,67 @@
                   target="_blank"
                   class="mx-1 text-teal"
                   color="#EFF2F1"
-                ></v-btn>
+                />
               </div>
             </div>
           </v-col>
           <v-col cols="2">
-            <p class="text-grey">Lorem ipsum</p>
-            <p class="text-grey">Lorem ipsum</p>
-            <p class="text-grey">Lorem ipsum</p>
-            <p class="text-grey">Lorem ipsum</p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
           </v-col>
           <v-col cols="2">
-            <p class="text-grey">Lorem ipsum</p>
-            <p class="text-grey">Lorem ipsum</p>
-            <p class="text-grey">Lorem ipsum</p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
           </v-col>
           <v-col cols="2">
-            <p class="text-grey">Lorem ipsum</p>
-            <p class="text-grey">Lorem ipsum</p>
-            <p class="text-grey">Lorem ipsum</p>
-            <p class="text-grey">Lorem ipsum</p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
           </v-col>
           <v-col cols="2">
-            <p class="text-grey">Lorem ipsum</p>
-            <p class="text-grey">Lorem ipsum</p>
-            <p class="text-grey">Lorem ipsum</p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
+            <p class="text-grey">
+              Lorem ipsum
+            </p>
           </v-col>
         </v-row>
       </v-col>
-      <v-col class="text-center mt-4" cols="12">
-        <v-divider class="mx-10"></v-divider>
+      <v-col
+        class="text-center mt-4"
+        cols="12"
+      >
+        <v-divider class="mx-10" />
       </v-col>
       <v-col cols="12">
         <v-row class="my-12 px-16">
@@ -76,11 +108,13 @@
             </p>
           </v-col>
           <v-col cols="4">
-            <p class="text-grey">Terms & Conditions --- Privacy Policy</p>
+            <p class="text-grey">
+              Terms & Conditions --- Privacy Policy
+            </p>
           </v-col>
         </v-row>
       </v-col>
-      <div class="px-4 py-4 bgCol text-center w-100 text-white"></div>
+      <div class="px-4 py-4 bgCol text-center w-100 text-white" />
     </v-row>
   </v-footer>
 </template>

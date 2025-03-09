@@ -8,19 +8,27 @@
         show-arrows="hover"
         color="green"
       >
-        <v-carousel-item v-for="(slide, i) in slides" :key="i">
-          <v-sheet height="100%" color="transparent">
+        <v-carousel-item
+          v-for="(slide, i) in slides"
+          :key="i"
+        >
+          <v-sheet
+            height="100%"
+            color="transparent"
+          >
             <div
               class="d-flex fill-height justify-center align-center text-center px-16"
             >
               <div class="">
                 <h1>{{ slide.title }}</h1>
-                <p class="px-16">{{ slide.text }}</p>
+                <p class="px-16">
+                  {{ slide.text }}
+                </p>
                 <v-avatar
                   :image="slide.avatar"
                   size="48"
                   class="mt-2"
-                ></v-avatar>
+                />
                 <h4>{{ slide.name }}</h4>
                 <p>{{ slide.cert }}</p>
               </div>

@@ -1,6 +1,8 @@
 <template>
-    
-    <v-col cols="6" class="px-8">
+  <v-col
+    cols="6"
+    class="px-8"
+  >
     <div class="text-subtitle-1 text-medium-emphasis">
       <v-btn
         class="text-none"
@@ -17,7 +19,7 @@
           placeholder="Enter your name"
           variant="outlined"
           color="teal-lighten-5"
-        ></v-text-field>
+        />
       </v-col>
       <v-col cols="5">
         <v-text-field
@@ -25,7 +27,7 @@
           placeholder="Enter your email"
           color="teal-lighten-5"
           variant="outlined"
-        ></v-text-field>
+        />
       </v-col>
       <v-col cols="2">
         <v-btn
@@ -39,5 +41,4 @@
       </v-col>
     </v-row>
   </v-col>
-
 </template>

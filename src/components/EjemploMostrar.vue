@@ -1,14 +1,23 @@
 <template>
   <v-row class="mb-16 pb-16">
     <v-col cols="12">
-      <v-toolbar density="compact" color="transparent">
+      <v-toolbar
+        density="compact"
+        color="transparent"
+      >
         <v-toolbar-title>Lista de usuarios</v-toolbar-title>
-        <v-spacer></v-spacer>
+        <v-spacer />
         <v-btn> View All Posts </v-btn>
       </v-toolbar>
     </v-col>
-    <template v-for="usuario in usuarios" :key="usuario.id">
-      <v-col cols="12" md="4">
+    <template
+      v-for="usuario in usuarios"
+      :key="usuario.id"
+    >
+      <v-col
+        cols="12"
+        md="4"
+      >
         <v-hover v-slot="{ isHovering, props }">
           <v-card
             :class="{ 'on-hover': isHovering }"
@@ -20,9 +29,10 @@
           >
             <!-- <v-img :src="item.img" height="350px" cover> </v-img> -->
             <v-img
-            src="\sin_foto.jpeg"
-            height="350px" cover
-            ></v-img>
+              src="\sin_foto.jpeg"
+              height="350px"
+              cover
+            />
             
             <v-card-title class="text-h6 d-flex flex-column">
               <p class="mt-4">
@@ -40,7 +50,6 @@
       </v-col>
     </template>
   </v-row>
-
 </template>
 
 <script>
