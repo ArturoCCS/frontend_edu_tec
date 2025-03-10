@@ -43,7 +43,7 @@
                     <span class="span">Forgot password?</span>
                 </div>
 
-                <button class="button-submit">Sign In</button>
+                <button class="button-submit" @click="registerWithGoogle()">Sign In</button>
                 <p class="p">Don't have an account? <span class="span">Sign Up</span></p>
                 <p class="p line">Or With</p>
 
@@ -77,6 +77,10 @@ export default {
       tipoMensaje: '' // "success" o "error" para cambiar el estilo
     };
   },
+  
+  registerWithGoogle() {
+      window.location.href = 'http://localhost:3000/auth/google'
+    },
   methods: {
     async register() {
       try {

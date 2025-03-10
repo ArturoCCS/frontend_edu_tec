@@ -26,7 +26,21 @@
       </div>
 
       <button class="button-submit">Sign In</button>
-      
+                <p class="p">Don't have an account? <span class="span">Sign Up</span></p>
+                <p class="p line">Or With</p>
+
+                <div class="flex-row">
+                    <button class="btn google"  @click="loginWithGoogle">
+                        svg
+                        Google 
+                    </button>
+                    
+                    <button class="btn apple">
+                        svg
+                        Apple 
+                        
+                    </button>
+                </div>
       <p class="p">{{ mensaje }}</p>
     </v-form>
   </v-row>
@@ -59,7 +73,8 @@ export default {
       email,
       password,
       mensaje,
-      handleLogin
+      handleLogin,
+      loginWithGoogle: authStore.loginWithGoogle
     }
   }
 }

@@ -17,6 +17,9 @@ export const useAuthStore = defineStore('auth', {
         return { success: false, message: error.response?.data?.message || 'Error en la autenticación' }
       }
     },
+    loginWithGoogle() {
+      window.location.href = 'http://localhost:3000/auth/google'
+    },
     logout() {
       axios.post('http://localhost:3000/auth/logout', {}, { withCredentials: true })
         .then(() => {
