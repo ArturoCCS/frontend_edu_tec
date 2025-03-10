@@ -6,7 +6,6 @@ import VueRouter from 'unplugin-vue-router/vite'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // Utilities
-import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
@@ -36,7 +35,7 @@ export default defineConfig({
   define: { 'process.env': {} },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': '/src'
     },
     extensions: [
       '.js',

@@ -20,4 +20,10 @@ const routes = [
     path: '/login',
     component: () => import('../pages/login.vue'),
   },
+  //Ejemplo ruta protegida al iniciar sesion 
+  {
+    path: '/protected_route',
+    //Ejemplo de direccionamiento de ruta protegida
+    component: () => import('../pages/protected_route.vue'),
+  },
 ]
