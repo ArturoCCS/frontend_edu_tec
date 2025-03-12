@@ -31,13 +31,7 @@
         href="/login"
         class="text-none ml-16 mr-4"
       >
-        login
-      </v-tab>
-      <v-tab
-        href="/register"
-        class="text-none me-4"
-      >
-        register
+        Inicio sesión
       </v-tab>
     </v-tabs>
   </v-app-bar>

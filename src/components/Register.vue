@@ -2,7 +2,7 @@
     <v-row class="mt-5 pt-5" justify="center">
        
      
-        <v-form class="form" @submit.prevent="register" href="/login">
+        <v-form class="form" @submit.prevent="handleRegister" href="/login">
             <v-img
             class="img"
             src="/petirrojo.jpg"
@@ -34,29 +34,21 @@
                    <input v-model="password" type="password" class="input" placeholder="Enter your Password">
                 <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"></path></svg>
             </div>
-                    
-            <div class="flex-row">
-                <div>
-                    <input type="checkbox">
-                        <label>Remember me </label>
-                    </div>
-                    <span class="span">Forgot password?</span>
-                </div>
+      
 
-                <button class="button-submit" @click="registerWithGoogle()">Sign In</button>
-                <p class="p">Don't have an account? <span class="span">Sign Up</span></p>
-                <p class="p line">Or With</p>
+                <button class="button-submit" >Registrarse</button>
+                <p class="p">¿Ya tienes una cuenta?  
+                  <a href="/login" class="span" style="text-decoration: none;">Iniciar sesión</a></p>
+                <p class="p line">O</p>
 
                 <div class="flex-row">
-                    <button class="btn google">
-                        svg
+                    <button class="btn google" @click="withGoogle">
+                        <img src="../assets/google.svg" alt="">
                         Google 
                     </button>
-                    
-                    <button class="btn apple">
-                        svg
-                        Apple 
-                        
+                    <button class="btn google" @click="withMicrosoft">
+                        <img src="../assets/microsoft.svg" alt="">
+                        Microsoft 
                     </button>
                 </div>
         </v-form>
@@ -65,45 +57,37 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { useAuthStore } from '@/stores/authStore';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
-  data() {
-    return {
-      nombre: '',
-      email: '',
-      password: '',
-      mensaje: '', // Para mostrar el mensaje de respuesta
-      tipoMensaje: '' // "success" o "error" para cambiar el estilo
-    };
-  },
-  
-  registerWithGoogle() {
-      window.location.href = 'http://localhost:3000/auth/google'
-    },
-  methods: {
-    async register() {
-      try {
-        const response = await axios.post('http://localhost:3000/auth/register', {
-          nombre: this.nombre,
-          email: this.email,
-          password: this.password,
-        });
+  setup() {
+    const authStore = useAuthStore()
+    const nombre = ref('')
+    const email = ref('')
+    const password = ref('')
+    const mensaje = ref('')
+    const router = useRouter()
 
-        this.mensaje = response.data.message;
-        this.tipoMensaje = response.data.status;
+    const handleRegister = async () => {
+      const response = await authStore.register({ nombre: nombre.value, email: email.value, password: password.value })
 
-        if (response.data.status === "success") {
-          alert('Registro exitoso');
-          localStorage.setItem('token', response.data.token);
-          console.log('Token guardado en localStorage:', localStorage.getItem('token'));
-          this.$router.push('/login');
-        }
-      } catch (error) {
-        this.mensaje = error.response?.data?.message || 'Hubo un problema con el registro';
-        this.tipoMensaje = "error";
-        alert(this.mensaje);
+      mensaje.value = response.message
+
+      if (response.success) {
+        router.push('/login')
       }
+    }
+
+    return {
+      nombre,
+      email,
+      password,
+      mensaje,
+      handleRegister,
+      withGoogle: authStore.withGoogle,
+      withMicrosoft: authStore.withMicrosoft
     }
   }
 };

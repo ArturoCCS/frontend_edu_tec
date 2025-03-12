@@ -1,5 +1,5 @@
 <template>
-  <v-row class="mt-5 pt-5" justify="center">
+  <v-row class="mt-2 mb-2" justify="center">
     <v-form class="form" @submit.prevent="handleLogin">
       <v-img class="img" src="/petirrojo.jpg" cover />
 
@@ -18,27 +18,22 @@
       </div>
 
       <div class="flex-row">
-        <div>
-          <input type="checkbox">
-          <label>Remember me</label>
-        </div>
-        <span class="span">Forgot password?</span>
+        <span class="span">¿Olvidó su contraseña?</span>
       </div>
 
-      <button class="button-submit">Sign In</button>
-                <p class="p">Don't have an account? <span class="span">Sign Up</span></p>
-                <p class="p line">Or With</p>
+      <button class="button-submit">Iniciar sesión</button>
+                <p class="p">¿No tienes una cuenta? 
+                  <a href="/register" class="span" style="text-decoration: none;">Regístrate</a></p>
+                <p class="p line">O</p> 
 
                 <div class="flex-row">
-                    <button class="btn google"  @click="loginWithGoogle">
-                        svg
+                    <button class="btn google" @click="withGoogle">
+                        <img src="../assets/google.svg" alt="">
                         Google 
                     </button>
-                    
-                    <button class="btn apple">
-                        svg
-                        Apple 
-                        
+                    <button class="btn google" @click="withMicrosoft">
+                        <img src="../assets/microsoft.svg" alt="">
+                        Microsoft 
                     </button>
                 </div>
       <p class="p">{{ mensaje }}</p>
@@ -74,7 +69,8 @@ export default {
       password,
       mensaje,
       handleLogin,
-      loginWithGoogle: authStore.loginWithGoogle
+      withGoogle: authStore.withGoogle,
+      withMicrosoft: authStore.withMicrosoft
     }
   }
 }
