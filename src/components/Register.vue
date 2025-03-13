@@ -50,7 +50,8 @@
                         <img src="../assets/microsoft.svg" alt="">
                         Microsoft 
                     </button>
-                </div>
+                </div>       
+              <p class="p">{{ mensaje }}</p>
         </v-form>
                
     </v-row>
@@ -75,7 +76,7 @@ export default {
 
       mensaje.value = response.message
 
-      if (response.success) {
+      if (response.status == "success") {
         router.push('/login')
       }
     }
