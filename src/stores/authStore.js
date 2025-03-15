@@ -23,8 +23,6 @@ export const useAuthStore = defineStore('auth', {
         });
 
         this.token = response.data.token;
-        Cookies.set("token", response.data.token, { expires: 7, secure: true, httpOnly: false });
-
         return { status: response.data.status, message: response.data.message };
       } catch (error) {
         return { status: "error", message: error.response?.data?.message || 'Error en la autenticación' };
@@ -41,7 +39,6 @@ export const useAuthStore = defineStore('auth', {
         const response = await axios.post('http://localhost:3000/auth/logout', {}, { withCredentials: true });
         this.user = null;
         this.token = null;
-        Cookies.remove("token");
         return { status: response.data.status, message: response.data.message };
       } catch (error) {
         return { status: "error", message: error.response?.data?.message || 'Error al cerrar sesión' };
@@ -50,13 +47,12 @@ export const useAuthStore = defineStore('auth', {
     async checkAuth() {
       try {
         const response = await axios.get('http://localhost:3000/auth/check-auth', { withCredentials: true });
+        this.token = response.data.user.token;
         this.user = response.data.user;
-        this.token = Cookies.get("token") || null;
         return { status: "success", message: "Usuario autenticado" };
       } catch (error) {
         this.user = null;
         this.token = null;
-        Cookies.remove("token");
         return { status: "error", message: error.response?.data?.message || 'No autenticado' };
       }
     },
