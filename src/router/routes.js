@@ -5,14 +5,6 @@ const routes = [
     
   },
   {
-    path: '/ejemplo',
-    component: () => import('../pages/ejemplo.vue'),
-  },
-  {
-    path: '/ejemplo2',
-    component: () => import('../pages/ejemplo2.vue'),
-  },
-  {
     path: '/register',
     component: () => import('../pages/register.vue'),
   },
@@ -20,10 +12,11 @@ const routes = [
     path: '/login',
     component: () => import('../pages/login.vue'),
   },
-  //Ejemplo ruta protegida al iniciar sesion 
-  {
-    path: '/protected_route',
-    //Ejemplo de direccionamiento de ruta protegida
+  { 
+    path: '/protected_route', 
     component: () => import('../pages/protected_route.vue'),
+    meta: { requiresAuth: true } 
   },
 ]
+
+export default routes;
