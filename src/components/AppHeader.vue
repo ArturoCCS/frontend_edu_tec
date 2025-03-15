@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 660px; width: 100%; background-color: #132f53">
+  <div style="height: 611px; width: 100%; background-color: #132f53">
     <NavBar />
     <v-row>
       <v-col
@@ -10,14 +10,14 @@
           class="text-white CT"
           style="font-weight: 700; font-size: 54px"
         >
-          Welcum
+          Text
         </h1>
         <br>
         <h1
           class="text-white CT"
           style="font-weight: 700; font-size: 54px"
         >
-          Titulo
+          Title
         </h1>
         <p class="text-grey CT">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore recusandae nostrum sunt molestiae atque, <br>

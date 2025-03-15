@@ -59,7 +59,7 @@ export default {
 
       mensaje.value = response.message
 
-      if (response.success) {
+      if (response.status == "success") {
         router.push('/protected_route')
       }
     }

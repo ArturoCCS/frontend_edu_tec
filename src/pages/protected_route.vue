@@ -1,10 +1,9 @@
 <template>
-    <NavBar />
-    <EjemploMostrar />
+  <NavBar />
+  <MuestraUser/>
 </template>
-  
+
 <script setup>
-import EjemploMostrar from '@/components/EjemploMostrar.vue';
+import MuestraUser from '@/components/MuestraUser.vue';
 import NavBar from '@/components/NavBar.vue';
 </script>
-  

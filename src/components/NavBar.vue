@@ -19,7 +19,7 @@
       color="white"
     >
       <v-tab
-        v-for="(link, i) in links"
+        v-for="(link, i) in filteredLinks"
         :key="i"
         :to="link.path"
         :value="i + 1"
@@ -27,23 +27,32 @@
       >
         {{ link.name }}
       </v-tab>
-      <v-tab
-        href="/login"
-        class="text-none ml-16 mr-4"
-      >
-        Inicio sesión
-      </v-tab>
+      <v-tab v-if="token" href="/" class="text-none ml-16 mr-4" @click="authStore.logout()">
+      Cerrar sesión
+    </v-tab>
+    <v-tab v-else href="/login" class="text-none ml-16 mr-4">
+      Iniciar sesión
+    </v-tab>
     </v-tabs>
   </v-app-bar>
 </template>
 
 <script setup>
+import { useAuthStore } from '@/stores/authStore.js';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
+
+const authStore = useAuthStore();
+const { token } = storeToRefs(authStore);
+
 const links = [
-  { name: "Home", path: "/" },
-  { name: "Ejemplo", path: "/ejemplo" },
-  { name: "Ejemplo2", path: "/ejemplo2" },
+  { name: "Inicio", path: "/" },
+  { name: "Protected Route", path: "/protected_route", requiresAuth: true },
 ];
 
-const title = import.meta.env.VITE_APP_TITLE;
+const filteredLinks = computed(() => {
+  return links.filter(link => !link.requiresAuth || (link.requiresAuth && token.value));
+});
 
+const title = import.meta.env.VITE_APP_TITLE;
 </script>
