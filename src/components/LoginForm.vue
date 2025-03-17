@@ -111,7 +111,7 @@ export default {
       }
 
       if (response.status === "success") {
-        router.push("/protected_route");
+        router.push("/protected-route");
       }
     };
 
