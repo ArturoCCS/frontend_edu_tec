@@ -3,10 +3,11 @@
   
     <v-row class="texto">
       <v-col
+        v-motion-slide-right
         cols="7"
         class="CG"
       >
-    <h1 ref="animatedText" class="text-black CT"
+    <h1 class="text-black CT"
           style="font-weight: 700; font-size: 54px">
       
       ¡Welcome!
@@ -30,15 +31,6 @@
           rounded
         >
           Lorem
-        </v-btn>
-        <v-btn
-          class="text-none mt-10"
-          color="black"
-          min-width="92"
-          variant="outlined"
-          rounded
-        >
-          lorem
         </v-btn>
       </v-col>
       <v-col
@@ -87,21 +79,6 @@
 
 </template>
 
-
-<script setup>
-import anime from 'animejs';
-import { onMounted } from 'vue';
-
-onMounted(() => {
-  anime({
-    targets: '.text-black',
-    translateY: [-100, 0],
-    opacity: [0, 1],
-    easing: 'easeOutExpo',
-    duration: 1000,
-  });
-});
-</script>
 
 <style>
 .CG {
