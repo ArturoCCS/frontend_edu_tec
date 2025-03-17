@@ -11,14 +11,6 @@ import { registerPlugins } from '@/plugins'
 import App from './App.vue'
 
 // Composables
-import { createApp } from 'vue'
-
-import { createPinia } from 'pinia'
 import './styles/main.scss'
 
-const app = createApp(App)
-app.use(createPinia()) 
-
-registerPlugins(app)
-
-app.mount('#app')
+registerPlugins(App)
