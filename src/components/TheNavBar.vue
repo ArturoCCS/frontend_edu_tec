@@ -3,48 +3,50 @@
     absolute
     color="white"
     width="80"
-    app 
+    app
     permanent
     class="fixed-navbar"
   >
-    <v-list dense class="text-center">
-      <v-list-item>
-        <v-img src="/sin_foto.jpeg" width="40" height="40" class="mx-auto"></v-img>
+    <div>
+      <v-list dense class="text-center">
+        <v-list-item>
+          <v-img src="/sin_foto.jpeg" width="40" height="40" class="mx-auto"></v-img>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list-item 
+          v-for="(item, i) in filteredNavItems" 
+          :key="i" 
+          link 
+          class="py-3"
+          :to="item.logout ? null : item.path"  
+          @click="handleClick(item)"
+        >
+          <v-tooltip location="right">
+            <template v-slot:activator="{ props }">
+              <v-badge 
+                v-if="item.notifications > 0"
+                :content="formattedNotifications(item.notifications)"
+                color="red"
+                offset-y="10"
+                offset-x="10"
+              >
+                <v-icon v-bind="props" :icon="item.icon" size="23"></v-icon>
+              </v-badge>
+              <v-icon v-else v-bind="props" :icon="item.icon" size="23"></v-icon>
+            </template>
+            {{ item.name }}
+          </v-tooltip>
+        </v-list-item>
+      </v-list>
+
+      <v-spacer class="px-6 py-3"></v-spacer>
+
+      <v-list-item link class="px-7 py-3">
+        <v-icon icon="fa-solid fa-gear" size="23"></v-icon>
       </v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list-item 
-        v-for="(item, i) in filteredNavItems" 
-        :key="i" 
-        link 
-        class="py-3"
-        :to="item.logout ? null : item.path"  
-        @click="item.logout ? authStore.logout() : null"
-      >
-        <v-tooltip location="right">
-          <template v-slot:activator="{ props }">
-            <v-badge 
-              v-if="item.notifications > 0"
-              :content="formattedNotifications(item.notifications)"
-              color="red"
-              offset-y="10"
-              offset-x="10"
-            >
-              <v-icon v-bind="props" :icon="item.icon" size="23"></v-icon>
-            </v-badge>
-            <v-icon v-else v-bind="props" :icon="item.icon" size="23"></v-icon>
-          </template>
-          {{ item.name }}
-        </v-tooltip>
-      </v-list-item>
-    </v-list>
-
-    <v-spacer class="px-6 py-3"></v-spacer>
-
-    <v-list-item link class="px-7 py-3">
-      <v-icon icon="fa-solid fa-gear" size="23"></v-icon>
-    </v-list-item>
+    </div>
   </v-navigation-drawer>
 </template>
 
@@ -52,9 +54,11 @@
 import { useAuthStore } from '@/stores/authStore.js';
 import { storeToRefs } from 'pinia';
 import { computed, ref } from "vue";
+import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore();
 const { token } = storeToRefs(authStore);
+const router = useRouter();
 
 const navItems = ref([
   { icon: "fa-solid fa-house", notifications: 0, name: "Inicio", path: "/" }, 
@@ -73,8 +77,15 @@ const filteredNavItems = computed(() => {
 
 const formattedNotifications = (notifications) => notifications > 99 ? '99+' : notifications;
 
+const handleClick = (item) => {
+  if (item.logout) {
+    authStore.logout();
+    router.push("/"); 
+  } else {
+    router.push(item.path); 
+  }
+}
 </script>
-
 
 <style scoped>
 .fixed-navbar {
