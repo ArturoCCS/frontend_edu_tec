@@ -16,6 +16,14 @@ export const useAuthStore = defineStore('auth', {
         return { status: "error", message: error.response?.data?.message || 'Error en la autenticación' };
       }
     },
+    async confirmEmail(token) {
+      try {
+        const response = await axios.get(`http://localhost:3000/auth/confirm/${token}`);
+        return { status: response.data.status, message: response.data.message };
+      } catch (error) {
+        return { status: 'error', message: error.response?.data?.message || 'Error al confirmar el correo' };
+      }
+    },
     async login(credentials) {
       try {
         const response = await axios.post('http://localhost:3000/auth/login', credentials, {

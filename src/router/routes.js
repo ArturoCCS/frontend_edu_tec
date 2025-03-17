@@ -9,6 +9,16 @@ const routes = [
     component: () => import('../pages/register.vue'),
   },
   {
+    path: '/confirm/:token',
+    name: 'confirmEmail',
+    component: () => import('../pages/confirmEmail.vue')
+  },
+  {
+    path: '/confirmation_required',
+    component: () => import('../pages/confirmationRequired.vue'),
+    name: 'confirmationRequired'
+  },
+  {
     path: '/login',
     component: () => import('../pages/login.vue'),
   },
