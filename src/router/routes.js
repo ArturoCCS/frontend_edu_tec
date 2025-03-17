@@ -1,3 +1,9 @@
+import ConfirmEmail from '@/components/ConfirmEmail.vue';
+import ForgotPassword from '@/components/ForgotPassword.vue';
+import LoginForm from '@/components/LoginForm.vue';
+import RegisterForm from '@/components/RegisterForm.vue';
+import ResetPasswordForm from '@/components/ResetPasswordForm.vue';
+
 const routes = [
   {
     path: '/',
@@ -6,27 +12,30 @@ const routes = [
   },
   {
     path: '/register',
-    component: () => import('../pages/register.vue'),
+    component: RegisterForm,
   },
   {
     path: '/confirm/:token',
-    name: 'confirmEmail',
-    component: () => import('../pages/confirmEmail.vue')
+    component: ConfirmEmail,
   },
   {
-    path: '/confirmation_required',
-    component: () => import('../pages/confirmationRequired.vue'),
-    name: 'confirmationRequired'
+    path: '/confirmation-required',
+    component: () => import('../pages/confirmationRequired.vue')
   },
   {
     path: '/login',
-    component: () => import('../pages/login.vue'),
+    component: LoginForm,
   },
   { 
-    path: '/protected_route', 
+    path: '/protected-route', 
     component: () => import('../pages/protected_route.vue'),
     meta: { requiresAuth: true } 
   },
+  { 
+    path: '/reset-password/:recoveryToken', 
+    component: ResetPasswordForm
+  },
+  { path: '/forgot-password', component: ForgotPassword },
 ]
 
 export default routes;

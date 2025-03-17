@@ -63,7 +63,7 @@ const router = useRouter();
 const navItems = ref([
   { icon: "fa-solid fa-house", notifications: 0, name: "Inicio", path: "/" }, 
   { icon: "fa-solid fa-right-to-bracket", notifications: 0, name: "Login", path: "/login", requiresGuest: true }, 
-  { icon: "fa-solid fa-user", notifications: 0, name: "Protected Route", path: "/protected_route", requiresAuth: true },
+  { icon: "fa-solid fa-user", notifications: 0, name: "Protected Route", path: "/protected-route", requiresAuth: true },
   { icon: "fa-solid fa-sign-out-alt", notifications: 0, name: "Cerrar sesión", path: "/", requiresAuth: true, logout: true },
 ]);
 

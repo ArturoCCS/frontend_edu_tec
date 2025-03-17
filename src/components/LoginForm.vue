@@ -26,8 +26,13 @@
 
 
         <div class="flex-row">
-          <span class="span">¿Olvidó su contraseña?</span>
+          <span class="span">
+            <router-link to="/forgot-password" class="span" style="text-decoration: none;">
+              ¿Olvidó su contraseña?
+            </router-link>
+          </span>
         </div>
+
 
         <button class="button-submit">Iniciar sesión</button>
         <p class="p">¿No tienes una cuenta?
