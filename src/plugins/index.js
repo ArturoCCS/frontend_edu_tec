@@ -9,7 +9,6 @@ import router from '@/router'
 import { MotionPlugin } from '@vueuse/motion'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
-import store from './store'
 import vuetify from './vuetify'
 
 export function registerPlugins(App) {
@@ -20,6 +19,5 @@ export function registerPlugins(App) {
     .use(vuetify)
     .use(MotionPlugin)
     .use(router)
-    .use(store)
     .mount('#app')
 }
