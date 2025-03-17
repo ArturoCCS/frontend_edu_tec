@@ -1,9 +1,7 @@
 <template>
-  <NavBar />
-  <MuestraUser/>
+  <UserCard/>
 </template>
 
 <script setup>
-import MuestraUser from '@/components/MuestraUser.vue';
-import NavBar from '@/components/NavBar.vue';
+import UserCard from '@/components/UserCard.vue';
 </script>

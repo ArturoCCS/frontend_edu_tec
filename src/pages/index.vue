@@ -1,18 +1,16 @@
 <template>
-  <AppHeader />
-  <v-container class="">
-    <AreaBooks />
-    <AreaVideos />
-    <AreaTrabajos />
-  </v-container>
-  <AppFooter />
+  <TheHeader />
+  <TheAreaBooks />
+  <TheAreaVideos />
+  <TheAreaTrabajos />
+  <TheFooter />
 </template>
 
 <script setup>
-import AppFooter from '@/components/AppFooter.vue';
-import AppHeader from '@/components/AppHeader.vue';
-import AreaBooks from '@/components/AreaBooks.vue';
-import AreaTrabajos from '@/components/AreaTrabajos.vue';
-import AreaVideos from '@/components/AreaVideos.vue';
+import TheAreaBooks from '@/components/TheAreaBooks.vue';
+import TheAreaTrabajos from '@/components/TheAreaTrabajos.vue';
+import TheAreaVideos from '@/components/TheAreaVideos.vue';
+import TheFooter from '@/components/TheFooter.vue';
+import TheHeader from '@/components/TheHeader.vue';
   //
 </script>

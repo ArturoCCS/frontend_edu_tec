@@ -1,18 +1,25 @@
 <template>
-  <v-row class="mt-16">
+  
+  <div style="height: 680px; width: 100%; background: white;">
+  <div class="cuadro5" :style="{background: $vuetify.theme.themes.light.colors.primary}" ></div>
+  <v-row>
     <v-col cols="7">
-      <h1 class="CRT mt-16">
+      <h1 class="CRT">
         Area de videos
       </h1>
       <p class="text-grey CRT">
         lorem ipsum, dolor sit amet consectetur <br>
         lorem ipsum, dolor sit amet consectetur adipisicing elit.
       </p>
+  
       <v-row>
         <v-col
           v-for="(cho, i) in chooses"
           :key="i"
-          cols="6"
+          style="
+          margin-left: 85px;
+        "
+          cols="3"
         >
           <v-card
             class="mx-auto my-8"
@@ -37,28 +44,30 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-btn
+      class="text-none text-white mt-10 mr-5 CRT"
+      color="black"
+      min-width="92"
+      rounded
+    >
+      Explorar
+    </v-btn>
     </v-col>
     <v-col cols="5">
-      <div
-        class=""
-        style="
-          background: url('dots-yellow.svg');
-          width: 255px;
-          height: 217px;
-          background-repeat: no-repeat;
-          position: absolute;
-          margin-left: -100px;
-          margin-top: -30px;
-        "
-      />
       <v-img
         src="\sin_foto.jpeg"
-        max-height="550"
+        max-height="450"
         contain
-        class="mr-12 mt-10"
+        style="
+          width: 300px;
+          margin-left: -120px;
+          margin-top: 70px;
+        "
       />
     </v-col>
   </v-row>
+  <div class="cuadro6" :style="{background: $vuetify.theme.themes.light.colors.primary}"></div>
+  </div>
 </template>
 <script>
 export default {
@@ -85,5 +94,19 @@ export default {
 <style scoped lang="scss">
 .icon {
   margin: 2px 2px;
+}
+.cuadro5{
+  position: absolute;
+  right: 0;
+  width: 40%;
+  height: 450px;
+  border-radius: 150px 0 0 150px;
+}
+
+.cuadro6{
+  margin-top: 50px;
+  width: 50%;
+  height: 300px;
+  border-radius: 250px 250px 0 0;
 }
 </style>

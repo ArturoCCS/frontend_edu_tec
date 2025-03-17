@@ -1,20 +1,11 @@
 <template>
-  <v-row class="mt-16 mb-16 pb-16">
-    <v-col cols="7">
+  <div class="cuadro7">
+
+  </div>
+  <v-row class=" mb-16 pb-16">
+    <v-col cols="7" >
       <v-row>
-        <v-col cols="8">
-          <div
-            class=""
-            style="
-              background: url('dots-green.svg');
-              width: 255px;
-              height: 217px;
-              background-repeat: no-repeat;
-              position: absolute;
-              margin-left: 0px;
-              margin-top: -30px;
-            "
-          />
+        <v-col cols="8" >
           <v-img
             src="\sin_foto.jpeg"
             max-height="600"
@@ -40,7 +31,7 @@
         </v-col>
       </v-row>
     </v-col>
-    <v-col cols="5">
+    <v-col cols="5" class="fondo2">
       <h2 class="CRT mt-16">
         Area de trabajos
       </h2>
@@ -124,6 +115,18 @@
     </v-col>
   </v-row>
 </template>
-<script>
 
-</script>
+<style scoped lang="scss">
+
+.fondo2{
+  z-index: 100;
+}
+.cuadro7{
+  position: absolute;
+  right: 0;
+  background: white;
+  width: 47.3%;
+  height: 400px;
+  border-radius: 0 0 250px 250px ;
+}
+</style>

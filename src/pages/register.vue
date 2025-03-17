@@ -5,6 +5,6 @@
 </template>
   
 <script setup>
-import Register from '@/components/Register.vue';
+import Register from '@/components/RegisterForm.vue';
 
 </script>
