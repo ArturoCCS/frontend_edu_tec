@@ -29,7 +29,7 @@ const routes = [
   { 
     path: '/protected-route', 
     component: () => import('../pages/protected_route.vue'),
-    meta: { requiresAuth: true } 
+    meta: { requiresAuth: true, requiresPermission: true }
   },
   { 
     path: '/reset-password/:recoveryToken', 

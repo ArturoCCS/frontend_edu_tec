@@ -1,3 +1,4 @@
+import { useUserStore } from '@/stores/userStore.js';
 import axios from 'axios';
 import Cookies from "js-cookie";
 import { defineStore } from 'pinia';
@@ -45,6 +46,8 @@ export const useAuthStore = defineStore('auth', {
     async logout() {
       try {
         const response = await axios.post('http://localhost:3000/auth/logout', {}, { withCredentials: true });
+        const userStore = useUserStore();
+        userStore.$reset();
         this.user = null;
         this.token = null;
         return { status: response.data.status, message: response.data.message };
@@ -55,14 +58,16 @@ export const useAuthStore = defineStore('auth', {
     async checkAuth() {
       try {
         const response = await axios.get('http://localhost:3000/auth/check-auth', { withCredentials: true });
-        this.token = response.data.user.token;
+
         this.user = response.data.user;
-        return { status: "success", message: "Usuario autenticado" };
+        this.token = this.user.token; 
+
+        return { status: response.data.status , message: response.data.message };
       } catch (error) {
         this.user = null;
         this.token = null;
-        return { status: "error", message: error.response?.data?.message || 'No autenticado' };
+        return { status: "error", message: error.response?.data?.message || 'No autenticado o sin permisos' };
       }
-    },
+    } 
   }
 });

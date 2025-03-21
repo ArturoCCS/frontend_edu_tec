@@ -52,25 +52,28 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/authStore.js';
+import { useUserStore } from '@/stores/userStore.js';
 import { storeToRefs } from 'pinia';
 import { computed, ref } from "vue";
 import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore();
+const userStore = useUserStore();
 const { token } = storeToRefs(authStore);
 const router = useRouter();
 
 const navItems = ref([
   { icon: "fa-solid fa-house", notifications: 0, name: "Inicio", path: "/" }, 
   { icon: "fa-solid fa-right-to-bracket", notifications: 0, name: "Login", path: "/login", requiresGuest: true }, 
-  { icon: "fa-solid fa-user", notifications: 0, name: "Protected Route", path: "/protected-route", requiresAuth: true },
+  { icon: "fa-solid fa-user", notifications: 0, name: "Protected Route", path: "/protected-route", requiresAuth: true, requiresPermission: "read_record" },
   { icon: "fa-solid fa-sign-out-alt", notifications: 0, name: "Cerrar sesión", path: "/", requiresAuth: true, logout: true },
 ]);
 
 const filteredNavItems = computed(() => {
   return navItems.value.filter(item => {
-    if (item.requiresAuth) return token.value; 
-    if (item.requiresGuest) return !token.value; 
+    if (item.requiresAuth && !token.value) return false; 
+    if (item.requiresGuest && token.value) return false; 
+    if (item.requiresPermission && !userStore.permissions.includes(item.requiresPermission)) return false; 
     return true;
   });
 });
