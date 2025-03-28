@@ -18,8 +18,7 @@
         />
       </v-col>
       <v-col cols="12">
-        <h1 style="color: #344d43; margin-left: 50px; margin-top: -100px">
-          {{ title }}
+        <h1 style="color: #344d43; margin-left: 40px; margin-top: -100px">{{ title }}
         </h1>
       </v-col>
       <v-col cols="12">
@@ -36,7 +35,7 @@
                   :icon="icon.icon"
                   :href="icon.link"
                   target="_blank"
-                  class="mx-1 text-teal"
+                  class="mx-1"
                   color="#EFF2F1"
                 />
               </div>

@@ -5,7 +5,7 @@
   <v-row>
     <v-col cols="7">
       <h1 class="CRT">
-        Area de videos
+       Lorem
       </h1>
       <p class="text-grey CRT">
         lorem ipsum, dolor sit amet consectetur <br>
@@ -50,7 +50,7 @@
       min-width="92"
       rounded
     >
-      Explorar
+      Boton
     </v-btn>
     </v-col>
     <v-col cols="5">
@@ -76,13 +76,13 @@ export default {
     chooses: [
       
       {
-        title: "Bla bla bla",
+        title: "Lorem",
         icon: "fa-brands fa-readme",
         desciption:
           "lorem ipsum, dolor sit amet consectetur adipisicing elit.",
       },
       {
-        title: "Bla bla bla",
+        title: "Lorem",
         icon: "fab fa-youtube",
         desciption:
           "lorem ipsum, dolor sit amet consectetur adipisicing elit.",

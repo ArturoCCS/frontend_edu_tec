@@ -6,16 +6,17 @@
 <v-row class="mt-16">
     <v-col cols="5" class="fondo">
     <h1 class="CRT ">
-      Explorar los libros
+      Lorem ipsum dolor 
     </h1>
     <h1 class="CRT">
-      en la plataforma
+      ipsum dolor sit amet 
     </h1>
+    <br>
     <p class="text-grey CRT">
-      Podras encontrar los mejores libros. <br>
-      sobre bla bla bla bla bla bla bla bla<br>
-      descarga, comenta y puntua<br>
-      los libros que más te gusten.
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit.  <br>
+       Quam dolorum architecto error maiores adipisci  <br>
+       provident necessitatibus deleniti quas velit, <br>
+      deserunt explicabo voluptatem quo!
     </p>
     <v-btn
       class="text-none text-white mt-10 mr-5 CRT"
@@ -23,13 +24,13 @@
       min-width="92"
       rounded
     >
-      Explorar
+      Boton
     </v-btn>
   </v-col>
 
   <v-col cols="6">
     <h3 class="mt-16">
-      Libros destacados
+      Lorem
     </h3>
     <v-row>
       <v-col
@@ -53,7 +54,7 @@
               <v-expand-transition>
                 <div
                   v-if="isHovering"
-                  class="d-flex transition-fast-in-fast-out bg-green-lighten-2 v-card--reveal text-h2"
+                  class="d-flex transition-fast-in-fast-out bg-black v-card--reveal text-h2"
                   style="height: 70%"
                 >
                   <v-btn
@@ -98,7 +99,7 @@ export default {
 }
 .cuadro4{
     position: absolute;
-    width: 100%;
+    width: 96%;
     height: 250px;
     border-radius: 0 0 0 150px;
 }

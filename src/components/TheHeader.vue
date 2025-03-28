@@ -10,7 +10,7 @@
     <h1 class="text-black CT"
           style="font-weight: 700; font-size: 54px">
       
-      ¡Welcome!
+      Bienvenido!
     </h1>
         
         <br>
@@ -18,7 +18,7 @@
           class="text-black CT"
           style="font-weight: 700; font-size: 54px"
         >
-          Title
+          Titulo
         </h1>
         <p class="text-grey CT">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore recusandae nostrum sunt molestiae atque, <br>
@@ -30,7 +30,7 @@
           min-width="92"
           rounded
         >
-          Lorem
+          Boton
         </v-btn>
       </v-col>
       <v-col

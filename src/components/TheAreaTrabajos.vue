@@ -33,11 +33,11 @@
     </v-col>
     <v-col cols="5" class="fondo2">
       <h2 class="CRT mt-16">
-        Area de trabajos
+        Lorem
       </h2>
       <p class="text-grey CRT">
-        Crea diferentes espacios de trabajo<br>
-        personales o en equipo<br>
+        Lorem ipsum dolor sit amet  .<br>
+        voluptate dicta <br>
       </p>
       <v-row>
         <v-col cols="6">
@@ -50,7 +50,7 @@
             </v-col>
             <v-col cols="10">
               <p class="text-grey">
-                Gestiona tareas<br>
+                Lorem<br>
               </p>
             </v-col>
           </v-row>
@@ -65,8 +65,8 @@
             </v-col>
             <v-col cols="10">
               <p class="text-grey">
-                Asigna tareas<br>
-                dapibus malesuada
+                Lorem <br>
+                Lorem
               </p>
             </v-col>
           </v-row>
@@ -81,8 +81,7 @@
             </v-col>
             <v-col cols="10">
               <p class="text-grey">
-                Bla bla<br>
-                bla bal
+                Lorem
               </p>
             </v-col>
           </v-row>
@@ -97,8 +96,8 @@
             </v-col>
             <v-col cols="10">
               <p class="text-grey">
-                Bla bla<br>
-                bla bal
+                Lorem<br>
+                Lorem
               </p>
             </v-col>
           </v-row>
@@ -110,7 +109,7 @@
         min-width="92"
         rounded
       >
-        Explore
+        Boton
       </v-btn>
     </v-col>
   </v-row>
