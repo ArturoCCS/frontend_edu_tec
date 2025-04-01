@@ -77,7 +77,7 @@ export default {
       
       {
         title: "Lorem",
-        icon: "fa-brands fa-readme",
+        icon: "fab fa-youtube",
         desciption:
           "lorem ipsum, dolor sit amet consectetur adipisicing elit.",
       },

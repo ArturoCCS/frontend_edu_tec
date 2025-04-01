@@ -103,12 +103,10 @@
         <v-row class="my-12 px-16">
           <v-col cols="8">
             <p class="text-grey">
-              Copyright ©2024. All Rights Reserved. 
             </p>
           </v-col>
           <v-col cols="4">
             <p class="text-grey">
-              Terms & Conditions --- Privacy Policy
             </p>
           </v-col>
         </v-row>

@@ -43,9 +43,7 @@
 
       <v-spacer class="px-6 py-3"></v-spacer>
 
-      <v-list-item link class="px-7 py-3">
-        <v-icon icon="fa-solid fa-gear" size="23"></v-icon>
-      </v-list-item>
+     
     </div>
   </v-navigation-drawer>
 </template>
