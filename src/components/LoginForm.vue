@@ -6,56 +6,46 @@
 
         <span v-if="mensaje" class="error-message">{{ mensaje }}</span>
 
-        <div :class="{ 'inputForm': true, 'error': emailError }">
+        <div class="inputForm" :class="{ error: errors.email }">
           <i class="icon-form fa-solid fa-envelope"></i>
           <input v-model="email" type="text" class="input" required>
           <div class="label-line">Enter your email</div>
-          <i v-if="emailError" class="error-icon fa-solid fa-triangle-exclamation"></i>
+          <i v-if="errors.email" class="error-icon fa-solid fa-triangle-exclamation"></i>
         </div>
-        <span v-if="emailError" class="error-message">{{ emailError }}</span>
+        <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
 
-        <div :class="{ 'inputForm': true, 'error': passwordError }">
+        <div class="inputForm" :class="{ error: errors.password }">
           <i class="icon-form fa-solid fa-lock icon"></i>
-          <i class="password fa-regular" :class="passwordVisible ? 'fa-eye-slash' : 'fa-eye'"
-            @click="togglePasswordVisibility()"></i>
+          <i class="password fa-regular" :class="passwordVisible ? 'fa-eye-slash' : 'fa-eye'" @click="togglePasswordVisibility"></i>
           <input v-model="password" :type="passwordVisible ? 'text' : 'password'" class="input" required>
           <div class="label-line">Enter your password</div>
-          <i v-if="passwordError" class="error-icon fa-solid fa-triangle-exclamation"></i>
+          <i v-if="errors.password" class="error-icon fa-solid fa-triangle-exclamation"></i>
         </div>
-        <span v-if="passwordError" class="error-message">{{ passwordError }}</span>
-
+        <span v-if="errors.password" class="error-message">{{ errors.password }}</span>
 
         <div class="flex-row">
-          <span class="span">
-            <router-link to="/forgot-password" class="span" style="text-decoration: none;">
-              ¿Olvidó su contraseña?
-            </router-link>
-          </span>
+          <router-link to="/forgot-password" class="span" style="text-decoration: none;">
+            ¿Olvidó su contraseña?
+          </router-link>
         </div>
 
-
         <button class="button-submit">Iniciar sesión</button>
-        <p class="p">¿No tienes una cuenta?
-          <a href="/register" class="span" style="text-decoration: none;">
-            Regístrate
-          </a>
+        <p class="p">
+          ¿No tienes una cuenta?
+          <a href="/register" class="span" style="text-decoration: none;">Regístrate</a>
         </p>
         <br>
         <p class="p line">O</p>
-
       </v-form>
 
       <div class="flex-row">
-        <button class="btn google" @click="withGoogle">
-          <img src="../assets/google.svg" alt="">
-          Google
+        <button class="btn google" @click="authStore.withGoogle">
+          <img src="../assets/google.svg" alt=""> Google
         </button>
-        <button class="btn google" @click="withMicrosoft">
-          <img src="../assets/microsoft.svg" alt="">
-          Microsoft
+        <button class="btn google" @click="authStore.withMicrosoft">
+          <img src="../assets/microsoft.svg" alt=""> Microsoft
         </button>
       </div>
-
     </div>
   </v-row>
 </template>
@@ -68,69 +58,49 @@ import { useRouter } from 'vue-router'
 export default {
   setup() {
     const authStore = useAuthStore()
+    const router = useRouter()
     const email = ref('')
     const password = ref('')
     const passwordVisible = ref(false)
     const mensaje = ref('')
-    const emailError = ref('')
-    const passwordError = ref('')
-    const router = useRouter()
+
+    const errors = ref({
+      email: '',
+      password: ''
+    })
+
+    const validateFields = () => {
+      errors.value.email = email.value ? '' : 'El correo es obligatorio.'
+      errors.value.password = password.value ? '' : 'La contraseña es obligatoria.'
+      return !errors.value.email && !errors.value.password
+    }
 
     const handleLogin = async () => {
-      emailError.value = "";
-      passwordError.value = "";
-      mensaje.value = "";
+      mensaje.value = ''
 
-      let hasError = false;
+      if (!validateFields()) return
 
-      if (!email.value) {
-        emailError.value = "El correo es obligatorio.";
-        hasError = true;
-      }
-      if (!password.value) {
-        passwordError.value = "La contraseña es obligatoria.";
-        hasError = true;
+      const response = await authStore.login({ email: email.value, password: password.value })
+
+      if (response.status === 'error') {
+        mensaje.value = response.message
+        if (response.message.includes('Correo')) errors.value.email = response.message
+        if (response.message.includes('contraseña')) errors.value.password = response.message
+        return
       }
 
-      if (hasError) {
-        return;
-      }
-
-      const response = await authStore.login({ email: email.value, password: password.value });
-
-      if (response.status === "error") {
-        mensaje.value = response.message;
-
-        if (response.message.includes("Correo")) {
-          emailError.value = response.message;
-        }
-        if (response.message.includes("contraseña")) {
-          passwordError.value = response.message;
-        }
-        return;
-      }
-
-      if (response.status === "success") {
-        router.push("/protected-route");
-      }
-    };
-
-
-    const togglePasswordVisibility = () => {
-      passwordVisible.value = !passwordVisible.value;
-    };
+      if (response.status === 'success') router.push('/protected-route')
+    }
 
     return {
       email,
       password,
       mensaje,
-      emailError,
-      passwordError,
+      errors,
       passwordVisible,
-      togglePasswordVisibility,
       handleLogin,
-      withGoogle: authStore.withGoogle,
-      withMicrosoft: authStore.withMicrosoft
+      togglePasswordVisibility: () => (passwordVisible.value = !passwordVisible.value),
+      authStore
     }
   }
 }

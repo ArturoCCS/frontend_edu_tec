@@ -1,3 +1,4 @@
+import BlogView from '@/components/BlogView.vue';
 import ConfirmEmail from '@/components/ConfirmEmail.vue';
 import ForgotPassword from '@/components/ForgotPassword.vue';
 import LoginForm from '@/components/LoginForm.vue';
@@ -36,6 +37,12 @@ const routes = [
     component: ResetPasswordForm
   },
   { path: '/forgot-password', component: ForgotPassword },
+  {
+  path: '/blog/:id',
+  name: 'Blog',
+  component: BlogView,
+}
+
 ]
 
 export default routes;
