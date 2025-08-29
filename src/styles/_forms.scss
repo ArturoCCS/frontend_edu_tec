@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 20px 40px;
   width: 450px;
   border-radius: 20px;
@@ -11,8 +11,8 @@
 }
 .img {
   margin: 0 auto;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
 }
 
 .form button {
@@ -110,6 +110,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  column-gap: 20px;
 }
 
 
@@ -148,7 +149,7 @@
   text-align: center;
   color: black;
   font-size: 14px;
-  margin: 5px 0;
+  margin: 10px 0;
 }
 
 .btn {
@@ -161,7 +162,7 @@
   align-items: center;
   font-weight: 500;
   gap: 10px;
-  border: 1px solid #ededef;
+  border: 1px solid #a6b2c4;
   background-color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;

@@ -1,16 +1,14 @@
 <template>
   <TheHeader />
   <TheAreaBooks />
-  <TheAreaVideos />
   <TheAreaTrabajos />
   <TheFooter />
 </template>
 
 <script setup>
-import TheAreaBooks from '@/components/TheAreaBooks.vue';
-import TheAreaTrabajos from '@/components/TheAreaTrabajos.vue';
-import TheAreaVideos from '@/components/TheAreaVideos.vue';
+import TheAreaBooks from '@/components/Home/TheAreaBooks.vue';
+import TheAreaTrabajos from '@/components/Home/TheAreaTrabajos.vue';
+import TheHeader from '@/components/Home/TheHeader.vue';
 import TheFooter from '@/components/TheFooter.vue';
-import TheHeader from '@/components/TheHeader.vue';
-  //
+
 </script>

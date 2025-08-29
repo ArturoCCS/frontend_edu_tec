@@ -1,37 +1,18 @@
 <template>
   <v-row class="mb-16 pb-16">
     <v-col cols="12">
-      <v-toolbar
-        density="compact"
-        color="transparent"
-      >
+      <v-toolbar density="compact" color="transparent">
         <v-toolbar-title>Recent Blog</v-toolbar-title>
         <v-spacer />
         <v-btn> View All Posts </v-btn>
       </v-toolbar>
     </v-col>
-    <template
-      v-for="(item, i) in items"
-      :key="i"
-    >
-      <v-col
-        cols="12"
-        md="4"
-      >
+    <template v-for="(item, i) in items" :key="i">
+      <v-col cols="12" md="4">
         <v-hover v-slot="{ isHovering, props }">
-          <v-card
-            :class="{ 'on-hover': isHovering }"
-            :elevation="isHovering ? 12 : 0"
-            v-bind="props"
-            color="transparent"
-            flat
-            style="border-radius: 10%"
-          >
-            <v-img
-              :src="item.img"
-              height="350px"
-              cover
-            />
+          <v-card :class="{ 'on-hover': isHovering }" :elevation="isHovering ? 12 : 0" v-bind="props"
+            color="transparent" flat style="border-radius: 10%">
+            <v-img :src="item.img" height="350px" cover />
             <v-card-title class="text-h6 d-flex flex-column">
               <p class="mt-4">
                 {{ item.title }}

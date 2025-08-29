@@ -26,25 +26,24 @@
   color: green;
   font-weight: bold;
 }
-
 </style>
 
 <script>
+import { useAuthStore } from '@/stores/authStore.js';
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useAuthStore } from '../stores/authStore.js';
 
 export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
     const authStore = useAuthStore();
-    
+
     const loading = ref(true);
     const error = ref(null);
     const message = ref(null);
 
-    const token = route.params.token;  
+    const token = route.params.token;
 
     onMounted(async () => {
       try {
@@ -53,7 +52,7 @@ export default {
         message.value = response.message;
 
         if (response.status === 'success') {
-          
+
           setTimeout(() => {
             router.push('/login');
           }, 3000);

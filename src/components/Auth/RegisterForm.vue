@@ -24,7 +24,7 @@
           <div class="label-line" :class="{ active: email || emailError }">Enter your email</div>
 
         </div>
-        <span v-if="emailError" class="error-message">{{ emailError }}</span> <!-- Mensaje de error fuera del div -->
+        <span v-if="emailError" class="error-message">{{ emailError }}</span>
 
 
         <div :class="passwordError ? 'inputForm error' : 'inputForm'">
@@ -47,17 +47,16 @@
             Iniciar sesión
           </a>
         </p>
-        <br>
         <p class="p line">O</p>
 
       </v-form>
       <div class="flex-row">
         <button class="btn google" @click="withGoogle">
-          <img src="../assets/google.svg" alt="">
+          <img src="/src/assets/google.svg" alt="">
           Google
         </button>
         <button class="btn google" @click="withMicrosoft">
-          <img src="../assets/microsoft.svg" alt="">
+          <img src="/src/assets/microsoft.svg" alt="">
           Microsoft
         </button>
       </div>

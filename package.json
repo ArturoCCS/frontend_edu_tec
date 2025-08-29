@@ -15,9 +15,13 @@
     "@vueuse/motion": "^3.0.3",
     "animejs": "^3.2.2",
     "axios": "^1.8.4",
+    "github-markdown-css": "^5.8.1",
+    "highlight.js": "^11.11.1",
     "js-cookie": "^3.0.5",
+    "markdown-it": "^14.1.0",
     "pinia": "^3.0.1",
     "roboto-fontface": "*",
+    "three": "^0.179.1",
     "vue": "^3.4.31",
     "vuetify": "^3.7.18"
   },

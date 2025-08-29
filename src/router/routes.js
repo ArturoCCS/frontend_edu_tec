@@ -1,9 +1,10 @@
-import BlogView from '@/components/BlogView.vue';
-import ConfirmEmail from '@/components/ConfirmEmail.vue';
-import ForgotPassword from '@/components/ForgotPassword.vue';
-import LoginForm from '@/components/LoginForm.vue';
-import RegisterForm from '@/components/RegisterForm.vue';
-import ResetPasswordForm from '@/components/ResetPasswordForm.vue';
+import ConfirmEmail from '@/components/Auth/ConfirmEmail.vue';
+import ForgotPassword from '@/components/Auth/ForgotPassword.vue';
+import LoginForm from '@/components/Auth/LoginForm.vue';
+import RegisterForm from '@/components/Auth/RegisterForm.vue';
+import ResetPasswordForm from '@/components/Auth/ResetPasswordForm.vue';
+import BlogForm from '@/components/Blog/BlogForm.vue';
+import BlogList from '@/components/Blog/BlogList.vue';
 
 const routes = [
   {
@@ -40,9 +41,19 @@ const routes = [
   {
   path: '/blog/:id',
   name: 'Blog',
-  component: BlogView,
-}
-
+  component: () => import('../pages/blogView.vue'),
+  meta: { requiresAuth: true }
+ } ,
+ {
+  path: '/listaBlogs/',
+  name:'ListadoBlog',
+  component: BlogList,
+  meta: { requiresAuth: true }
+ },
+ {
+  path: '/about',
+  component: BlogForm,
+ }
 ]
 
 export default routes;

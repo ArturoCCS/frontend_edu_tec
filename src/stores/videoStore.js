@@ -11,7 +11,7 @@ export const useVideoStore = defineStore('videoStore', {
       try {
         const userEmail = useAuthStore().user.email;
         const response = await axios.get(`http://localhost:3000/plataform?userEmail=${encodeURIComponent(userEmail)}`, { withCredentials: true });
-        this.videos = response.data || []; // 📌 Asegurar que se asignan correctamente los datos
+        this.videos = response.data || [];
       } catch (error) {
         console.error("❌ Error al cargar videos:", error);
       }

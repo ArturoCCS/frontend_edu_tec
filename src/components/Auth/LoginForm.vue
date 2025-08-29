@@ -16,7 +16,8 @@
 
         <div class="inputForm" :class="{ error: errors.password }">
           <i class="icon-form fa-solid fa-lock icon"></i>
-          <i class="password fa-regular" :class="passwordVisible ? 'fa-eye-slash' : 'fa-eye'" @click="togglePasswordVisibility"></i>
+          <i class="password fa-regular" :class="passwordVisible ? 'fa-eye-slash' : 'fa-eye'"
+            @click="togglePasswordVisibility"></i>
           <input v-model="password" :type="passwordVisible ? 'text' : 'password'" class="input" required>
           <div class="label-line">Enter your password</div>
           <i v-if="errors.password" class="error-icon fa-solid fa-triangle-exclamation"></i>
@@ -34,16 +35,15 @@
           ¿No tienes una cuenta?
           <a href="/register" class="span" style="text-decoration: none;">Regístrate</a>
         </p>
-        <br>
         <p class="p line">O</p>
       </v-form>
 
       <div class="flex-row">
         <button class="btn google" @click="authStore.withGoogle">
-          <img src="../assets/google.svg" alt=""> Google
+          <img src="/src/assets/google.svg" alt=""> Google
         </button>
         <button class="btn google" @click="authStore.withMicrosoft">
-          <img src="../assets/microsoft.svg" alt=""> Microsoft
+          <img src="/src/assets/microsoft.svg" alt=""> Microsoft
         </button>
       </div>
     </div>

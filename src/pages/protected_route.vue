@@ -10,11 +10,9 @@ import UserCard from '@/components/UserCard.vue';
 <template>
   <div>
     <BlogForm />
-    <BlogList />
   </div>
 </template>
 
 <script setup>
-import BlogForm from '../components/BlogForm.vue';
-import BlogList from '../components/BlogList.vue';
+import BlogForm from '../components/Blog/BlogForm.vue';
 </script>

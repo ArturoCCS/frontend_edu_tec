@@ -38,17 +38,17 @@
 
 <script>
 import { useVideoStore } from '@/stores/videoStore';
-import { storeToRefs } from 'pinia'; // 📌 Importar storeToRefs
+import { storeToRefs } from 'pinia';
 import { onMounted, ref } from 'vue';
 
 export default {
   setup() {
     const videoStore = useVideoStore();
-    const { videos } = storeToRefs(videoStore); // 📌 Hacer videos reactivo
+    const { videos } = storeToRefs(videoStore);
     const newVideo = ref({ title: '', description: '', url: '' });
 
     onMounted(async () => {
-      await videoStore.fetchVideos(); // 📌 Asegurar que se ejecuta correctamente
+      await videoStore.fetchVideos();
     });
 
     const addVideo = async () => {
