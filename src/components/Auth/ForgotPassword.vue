@@ -1,6 +1,6 @@
 <template>
   <v-row class="mt-2 mb-2" justify="center">
-    <div class="form">
+    <div class="form" :style="{ '--secondary': $vuetify.theme.themes.light.colors.secondary }">
       <v-form @submit.prevent="handlePasswordReset">
         <v-img class="img" src="/petirrojo.jpg" cover />
 
@@ -14,7 +14,7 @@
         </div>
         <span v-if="emailError" class="error-message">{{ emailError }}</span>
 
-        <button class="button-submit">Enviar enlace de recuperación</button>
+        <button class="button-submit" :style="{ color: $vuetify.theme.themes.light.colors.secondary }">Enviar enlace de recuperación</button>
       </v-form>
     </div>
   </v-row>

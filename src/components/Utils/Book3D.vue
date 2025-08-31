@@ -9,11 +9,9 @@
   >
     <div class="book" ref="bookEl" :style="bookStyle">
       <div class="face cover front" :style="frontCoverStyle">
-        <div class="cover-content">
+        <div class="cover-content" :style="{ color: $vuetify.theme.themes.light.colors.secondary }">
           <slot name="cover">
             <div class="default-cover">
-              <div class="title">{{ title }}</div>
-              <div v-if="author" class="author">{{ author }}</div>
             </div>
           </slot>
         </div>
@@ -163,7 +161,7 @@ function onMouseLeave() {
   height: var(--book-h);
   transform-origin: left center;
   transform: translateZ(var(--t2)) rotateY(var(--open-angle));
-  box-shadow: 3px 3px 7px 5px rgb(185 188 193), inset 0px 0px 0px 0px rgb(255 255 255 / 5%);
+  box-shadow: 3px 3px 7px 5px rgb(185, 188, 193), inset 0px 0px 0px 0px rgb(255 255 255 / 5%);
   overflow: hidden;
 }
 
@@ -253,7 +251,6 @@ function onMouseLeave() {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  color: white;
   text-shadow: 0 2px 8px rgba(0,0,0,0.35);
   background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(177, 177, 177, 0.35));
 }

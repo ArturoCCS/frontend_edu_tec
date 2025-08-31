@@ -1,80 +1,43 @@
 <template>
   <v-footer class="">
-    <v-row justify="center" no-gutters class="mt-16">
+    <v-row justify="center" no-gutters class="mt-16 footer-content">
       <v-col cols="5" />
       <v-col cols="6">
         <v-img src="\petirrojo.jpg" cover max-height="200" max-width="200" min-height="50" min-width="50"
-          style="margin-top: -150px; margin-left: 50%; margin-bottom: 25px" />
+          style="margin-top: -150px; margin-left: 50%; margin-bottom: 25px; z-index: 200;" />
       </v-col>
       <v-col cols="12">
-        <h1 style="color: #344d43; margin-left: 40px; margin-top: -100px">{{ title }}
+        <h1 style=" margin-left: 40px; margin-top: -100px">{{ title }}
         </h1>
       </v-col>
       <v-col cols="12">
         <v-row>
-          <v-col cols="4">
-            <p class="text-grey ml-10">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum vero perspiciatis molestias dolore veniam ex,
-              aliquid error nostrum recusandae aut, dolor quod maxime eos dignissimos animi dolorem nobis quos
-              inventore.
-            </p>
+          <v-col cols="6">
+            <div class="text-grey ml-10">
+              <h3>Dirección</h3>
+              Av. Tecnológico No. 186 Manzanillos C.P. 61534, H. Zitácuaro, Michoacán, México.
+
+              <br>
+              <br>
+              <h3>Contacto</h3>
+
+
+              Email: dir_zitacuaro@tecnm.mx
+
+              Tel. (715) 690-9001
+
+              www.tecnm.mx
+
+              zitacuaro.tecnmx.mx
+            </div>
             <div>
-              <div class="ml-8 mt-5">
+              <div class="ml-8 mt-10 footer-icons">
                 <v-btn v-for="icon in icons" :key="icon" :icon="icon.icon" :href="icon.link" target="_blank"
-                  class="mx-1" color="#EFF2F1" />
+                  class="mx-1" :style="{ color: $vuetify.theme.themes.light.colors.primary }" />
               </div>
             </div>
           </v-col>
-          <v-col cols="2">
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-          </v-col>
-          <v-col cols="2">
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-          </v-col>
-          <v-col cols="2">
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-          </v-col>
-          <v-col cols="2">
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-            <p class="text-grey">
-              Lorem ipsum
-            </p>
-          </v-col>
+      
         </v-row>
       </v-col>
       <v-col class="text-center mt-4" cols="12">
@@ -92,7 +55,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <div class="px-4 py-4 bgCol text-center w-100 text-white" />
+      <div :style="{ '--primary': $vuetify.theme.themes.light.colors.primary }" class="px-4 py-4 bgCol text-center w-100 text-white" />
     </v-row>
   </v-footer>
 </template>
@@ -127,7 +90,7 @@ export default {
 }
 
 .bgCol {
-  background-color: #eff2f1;
+  background-color: var(--primary);
 }
 
 .bgTop {
@@ -136,5 +99,23 @@ export default {
 
 .bgMidum {
   background-color: #1f1f1f;
+}
+
+.footer-icons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .footer-content {
+    padding-top: 50px;
+  }
+  .footer-icons {
+    justify-content: flex-start;
+    gap: 6px;
+  }
 }
 </style>

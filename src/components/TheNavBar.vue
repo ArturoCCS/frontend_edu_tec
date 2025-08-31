@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-if="!isMobile" absolute color="white" width="60" app permanent class="fixed-navbar">
+  <v-navigation-drawer v-if="!isMobile" absolute width="60" app permanent class="fixed-navbar">
     <div>
       <v-list dense class="text-center">
         <v-list-item>
@@ -24,15 +24,15 @@
     </div>
   </v-navigation-drawer>
 
-  <v-bottom-navigation v-else class="mobile-navbar" app fixed color="white">
+  <v-bottom-navigation v-else class="mobile-navbar" app fixed height="50" >
     <v-btn v-for="(item, i) in filteredNavItems" :key="i" :to="item.logout ? null : item.path"
       @click="handleClick(item)" class="text-center" style="flex:1;" :aria-label="item.name">
       <v-badge v-if="item.notifications > 0" :content="formattedNotifications(item.notifications)" color="red"
         offset-y="10" offset-x="10">
-        <v-icon :icon="item.icon" size="22"></v-icon>
+        <v-icon :icon="item.icon" size="20"></v-icon>
       </v-badge>
-      <v-icon v-else :icon="item.icon" size="22"></v-icon>
-      <span style="font-size:0.7em;display:block;">{{ item.name }}</span>
+      <v-icon v-else :icon="item.icon" size="20"></v-icon>
+      <span style="font-size:0.7em;display:block; padding-top: 5px;">{{ item.name }}</span>
     </v-btn>
   </v-bottom-navigation>
 </template>

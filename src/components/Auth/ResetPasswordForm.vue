@@ -1,7 +1,7 @@
 <template>
     
     <v-row class="mt-4 mb-4" justify="center">
-      <div class="form">
+      <div class="form"  :style="{ '--secondary': $vuetify.theme.themes.light.colors.secondary }">
         <v-form @submit.prevent="handleResetPassword">
           <h2>Restablecer tu contraseña</h2>
   
@@ -25,7 +25,7 @@
           </div>
           <span v-if="confirmPasswordError" class="error-message">{{ confirmPasswordError }}</span>
   
-          <button class="button-submit">Restablecer contraseña</button>
+          <button class="button-submit" :style="{ color: $vuetify.theme.themes.light.colors.secondary }">Restablecer contraseña</button>
   
         </v-form>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <v-row class="mt-2 pt-2" justify="center">
-    <div class="form">
+    <div class="form"  :style="{ '--secondary': $vuetify.theme.themes.light.colors.secondary }">
       <v-form @submit.prevent="handleRegister" href="/login">
         <v-img class="img" src="/petirrojo.jpg" cover />
 
@@ -41,7 +41,7 @@
         <span v-if="passwordError" class="error-message">{{ passwordError }}</span>
 
 
-        <button class="button-submit">Registrarse</button>
+        <button class="button-submit" :style="{ color: $vuetify.theme.themes.light.colors.secondary }">Registrarse</button>
         <p class="p">¿Ya tienes una cuenta?
           <a href="/login" class="span" style="text-decoration: none;">
             Iniciar sesión
@@ -51,11 +51,11 @@
 
       </v-form>
       <div class="flex-row">
-        <button class="btn google" @click="withGoogle">
+        <button class="btn google" @click="withGoogle" :style="{ background: $vuetify.theme.themes.light.colors.secondary }">
           <img src="/src/assets/google.svg" alt="">
           Google
         </button>
-        <button class="btn google" @click="withMicrosoft">
+        <button class="btn google" @click="withMicrosoft" :style="{ background: $vuetify.theme.themes.light.colors.secondary }">
           <img src="/src/assets/microsoft.svg" alt="">
           Microsoft
         </button>

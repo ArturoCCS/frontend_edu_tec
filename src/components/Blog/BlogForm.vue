@@ -8,7 +8,7 @@
         <option value="simple">Blog Simple</option>
         <option value="documentacion">Documentación</option>
       </select>
-      <button type="submit" class="btn btn-primary">Guardar</button>
+      <button type="submit" class="btn btn-primary" :style="{ background: $vuetify.theme.themes.light.colors.secondary }">Guardar</button>
     </form>
   </div>
 

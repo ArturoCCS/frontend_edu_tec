@@ -1,9 +1,11 @@
+$secondary: #fff;
+
 .paper-sheet {
   
   display: flex;
   min-height: 100vh;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  background: #fff;
+  background:  var(--secondary);
   border-radius: 7px;
   box-shadow: 9px 12px 20px 4px rgba(0, 0, 0, 0.13), 7px 7px 12px 2px rgba(0, 0, 0, 0.08), 0 2px 0px 0px #eee;
   border: 1px solid #f2f2f2;

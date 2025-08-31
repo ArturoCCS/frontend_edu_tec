@@ -1,50 +1,53 @@
 <template>
 
-  <div style="height: 680px; width: 100%; background: white;">
+  <div style="height: 880px; width: 100%;" :style="{ background: $vuetify.theme.themes.light.colors.secondary }">
     <div class="cuadro5" :style="{ background: $vuetify.theme.themes.light.colors.primary }"></div>
     <v-row>
-      <v-col cols="7">
-        <h1 class="CRT">
-          Lorem
+      <v-col cols="7" v-motion-slide-visible-bottom>
+        <h1 class="title-area-videos">
+          Videos Educativos
         </h1>
-        <p class="text-grey CRT">
-          lorem ipsum, dolor sit amet consectetur <br>
-          lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        <br>
+        <p class="text-grey description-area-videos">
+          En nuestra portal TECNM, podras acceder a recursos audiovisuales actualizados para potenciar tu aprendizaje y colaborar con la comunidad académica. 
+          <br>
+          <br>
+          Encuentra el contenido que necesitas para tu formación, y contribuye con tus propios materiales para apoyar a otros estudiantes y educadores.
         </p>
 
         <v-row>
-          <v-col v-for="(cho, i) in chooses" :key="i" style="
-          margin-left: 34px;
-        " cols="3">
+          <v-col v-for="(cho, i) in chooses" :key="i" 
+          class="col-video"
+          v-motion-slide-visible-left
+          >
             <v-card class="mx-auto my-8" max-width="345" color="transparent" flat>
               <v-card-item>
-                <v-icon :class="cho.icon" class="icon" color="" />
-                <v-card-title>
+                <v-card-title class="title-card-videos">
                   {{ cho.title }}
                 </v-card-title>
               </v-card-item>
 
-              <v-card-text class="text-grey">
+              <v-card-text class="text-grey description-card-videos">
                 {{ cho.desciption }}
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
-        <v-btn class="text-none text-white mt-10 mr-6 CRT" color="black" min-width="92" rounded>
+        <v-btn class="text-none text-white mr-6 mx-8" color="black" min-width="92" rounded v-motion-slide-visible-left>
           Boton
         </v-btn>
       </v-col>
       <v-col cols="5" style="position: relative; z-index: 2;">
 
         <iframe
-          style="width: 400px; height: 230px; max-height: 230px; margin-left: -125px; margin-top: 90px; border-radius: 16px; background: #000; object-fit: cover; z-index: 2; position: relative;"
+         v-motion-slide-visible-right 
+          class="video-iframe"
           src="https://www.youtube.com/embed/g5t8XqXg8mw?si=35OteMVpegcw74lj" title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </v-col>
     </v-row>
-    <div class="cuadro6" :style="{ background: $vuetify.theme.themes.light.colors.primary }"></div>
   </div>
 </template>
 <script>
@@ -54,16 +57,14 @@ export default {
     chooses: [
 
       {
-        title: "Lorem",
-        icon: "fab fa-youtube",
+        title: "Blogs",
         desciption:
-          "lorem ipsum, dolor sit amet consectetur adipisicing elit.",
+          "Dentro de los blogs, los docentes pueden compartir sus contenidos y visualizarlos.",
       },
       {
-        title: "Lorem",
-        icon: "fab fa-youtube",
+        title: "Explora",
         desciption:
-          "lorem ipsum, dolor sit amet consectetur adipisicing elit.",
+          "Podras encontrar blogs donde mostramos más sobre las carreras",
       },
     ],
   }),
@@ -71,7 +72,19 @@ export default {
 </script>
 <style scoped lang="scss">
 .icon {
-  margin: 2px 2px;
+  margin: 2px 1px;
+}
+
+.video-iframe{
+  width: 400px; 
+  height: 230px; 
+  margin-left: -125px; 
+  margin-top: 90px; 
+  border-radius: 16px; 
+  background: #000; 
+  object-fit: cover; 
+  z-index: 2; 
+  position: relative;
 }
 
 .cuadro5 {
@@ -84,10 +97,70 @@ export default {
   pointer-events: none;
 }
 
-.cuadro6 {
-  margin-top: 50px;
-  width: 50%;
-  height: 300px;
-  border-radius: 250px 250px 0 0;
+.title-area-videos{
+  font-size: clamp(1.4rem, 4vw, 2.7rem);
+  font-weight: 800;
+  margin-left: 50px;
+  
+}
+.description-area-videos {
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  font-weight: 300;
+  color: #383838;
+  margin-left: 50px;
+  max-width: 70%;
+}
+
+.title-card-videos{
+  font-size: clamp(0.4rem, 4vw, 1.7rem);
+  font-weight: 600;
+  
+}
+.description-card-videos {
+  font-size: clamp(0.3rem, 2vw, 1rem);
+  font-weight: 300;
+  color: #383838;
+}
+
+.col-video {
+  margin-left: 35px;
+}
+
+@media (max-width: 960px) {
+  .title-area-videos{
+    margin-left: 30px;
+  }
+  .description-area-videos {
+    margin-left: 30px;
+  }
+
+  .video-iframe{
+    max-width: 300px;
+    max-height: 200px;
+    margin-left: -85px; 
+    margin-top: 95px; 
+  }
+}
+@media (max-width: 600px) {
+  .title-area-videos{
+    margin-left: 30px;
+    
+  }
+  .description-area-videos {
+    margin-left: 30px;
+    max-width: 180px;
+  }
+  .video-iframe{
+    max-width: 180px;
+    max-height: 150px;
+    margin-left: -40px; 
+    margin-top: 140px; 
+  }
+
+  .col-video {
+    margin-left: 16px;
+    
+    min-width: 190px;
+  }
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <TheHeader />
   <TheAreaBooks />
+  <TheAreaVideos/>
   <TheAreaTrabajos />
   <TheFooter />
 </template>

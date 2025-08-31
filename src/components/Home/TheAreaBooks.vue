@@ -1,15 +1,15 @@
 <template>
-  <div style="height: 600px; width: 100%; background: white;">
+  <div style="height: 600px; width: 100%;" :style="{ background: $vuetify.theme.themes.light.colors.secondary }">
     <div class="cuadro4" :style="{ background: $vuetify.theme.themes.light.colors.primary }">
 
     </div>
-    <v-row class="mt-16">
-      <v-col cols="5" class="fondo">
-        <h1 class="CRT" v-motion-slide-visible-bottom>
+    <v-row class="content-area-books">
+      <v-col cols="6" class="text-area-books">
+        <h1 class="title-area-books" v-motion-slide-visible-bottom>
           Libreria Virtual
         </h1>
         <br>
-        <p class="text-books CRT" v-motion-slide-visible-bottom>
+        <p class="description-area-books" v-motion-slide-visible-bottom>
           Explora un catálogo que te ayuda a enriquecer tu aprendizaje, <br>
           encontrar lecturas recomendadas, organizar tus estudios y <br>
           acceder a recursos educativos de calidad en línea. <br> <br>
@@ -20,12 +20,12 @@
         </p>
       </v-col>
 
-      <v-col cols="6" style="margin-top: 60px;">
-        <v-row>
+      <v-col class="card-books" >
+        <v-row >
           <v-col v-for="(libro, i) in libros" :key="i" cols="4">
             <div v-motion-slide-visible-bottom>
               <v-hover v-slot="{ isHovering, props }">
-                <v-card class="mx-auto" color="transparent" max-width="400" v-bind="props" flat>
+                <v-card class="mx-auto" color="transparent" min-width="80" v-bind="props" flat>
                   <v-img :src="libro.portada" cover max-height="250" />
                   <v-expand-transition>
                     <div v-if="isHovering" class="d-flex transition-fast-in-fast-out  v-card--reveal text-h2"
@@ -71,21 +71,17 @@ export default {
 };
 </script>
 <style>
-.CRT {
-  margin-left: 50px;
-}
 
 .cuadro4 {
   position: absolute;
-  width: 96%;
-  height: 250px;
+  width: 100%;
+  height: 360px;
   border-radius: 0 0 0 150px;
 }
 
-.fondo {
-
-  margin-top: -60px;
-  z-index: 100;
+.card-books {
+  margin-top: 230px;
+  margin-right: 5%;
 }
 
 .v-card--reveal {
@@ -101,9 +97,64 @@ export default {
   background: rgba(163, 187, 242, 0.696);
 }
 
-.text-books {
-  font-size: 0.4m;
+
+.title-area-books{
+  font-size: clamp(1.4rem, 4vw, 2.7rem);
+  font-weight: 800;
+  margin-left: 50px;
+  
+}
+.description-area-books {
+  font-size: clamp(0.7rem, 2vw, 1rem);
   font-weight: 300;
   color: #383838;
+  margin-left: 50px;
+}
+
+.content-area-books{
+  margin-top: 64px ;
+}
+
+@media (max-width: 960px) {
+  .title-area-books{
+    margin-left: 40px;
+  }
+  .description-area-books {
+    
+    margin-left: 40px;
+  }
+  .card-books {
+    margin-top: 34%;
+  }
+}
+@media (max-width: 600px) {
+ 
+
+  .title-area-books{
+    margin-left: 30px;
+  }
+  .description-area-books{
+    
+    margin-left: 30px;
+  }
+
+  .content-area-books {
+    flex-direction: column;
+  }
+
+  .text-area-books{
+    margin-top: 80px;
+    min-width: 350px;
+  }
+  .card-books {
+    margin-left: 90px;
+    margin-top: 0;
+    max-width: 75%;
+  }
+
+  .pt-6 .text-h6{
+    font-size: 0.8rem !important;
+  }
+  
 }
 </style>
