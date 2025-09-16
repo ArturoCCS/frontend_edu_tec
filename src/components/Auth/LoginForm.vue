@@ -42,7 +42,7 @@
         <button class="btn google" @click="authStore.withGoogle"  :style="{ background: $vuetify.theme.themes.light.colors.secondary }">
           <img src="/src/assets/google.svg" alt=""> Google
         </button>
-        <button class="btn google" @click="authStore.withMicrosoft"  :style="{ background: $vuetify.theme.themes.light.colors.secondary }">
+        <button class="btn micro" @click="authStore.withMicrosoft"  :style="{ background: $vuetify.theme.themes.light.colors.secondary }">
           <img src="/src/assets/microsoft.svg" alt=""> Microsoft
         </button>
       </div>
@@ -89,7 +89,10 @@ export default {
         return
       }
 
-      if (response.status === 'success') router.push('/protected-route')
+      if (response.status === 'success') {
+        await authStore.checkAuth();
+        router.push('/protected-route')
+      }
     }
 
     return {

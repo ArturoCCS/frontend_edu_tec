@@ -52,8 +52,9 @@ const router = useRouter();
 const navItems = ref([
   { icon: "fa-solid fa-house", notifications: 0, name: "Inicio", path: "/" },
   { icon: "fa-solid fa-right-to-bracket", notifications: 0, name: "Login", path: "/login", requiresGuest: true },
-  { icon: "fa-solid fa-book", notifications: 0, name: "Blog", path: "/listaBlogs", requiresAuth: true },
-  { icon: "far fa-user", notifications: 0, name: "Protected Route", path: "/protected-route", requiresAuth: true, requiresPermission: "read_record" },
+  { icon: "fa-solid fa-file", notifications: 0, name: "Blog", path: "/listaBlogs", requiresAuth: true },
+  { icon: "fa-solid fa-book", notifications: 0, name: "Libro", path: "/listaLibros", requiresAuth: true },
+  { icon: "fa-solid fa-notes-medical", notifications: 0, name: "Creador de blogs", path: "/protected-route", requiresAuth: true, requiresPermission: "read_record" },
   { icon: "fa-solid fa-sign-out-alt", notifications: 0, name: "Cerrar sesión", path: "/", requiresAuth: true, logout: true },
 ]);
 

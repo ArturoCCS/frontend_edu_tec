@@ -21,6 +21,10 @@
         Podras encontrar variedad de blogs<br>
         creados por tus maestros <br>
       </p>
+
+       <v-btn :to="'/listaBlogs'" class="text-none text-white mt-14" color="black" min-width="92" rounded v-motion-slide-visible-bottom>
+          Explorar
+        </v-btn>
       
       <div class="cuadro7"  :style="{ background: $vuetify.theme.themes.light.colors.secondary }"></div>
     </v-col>

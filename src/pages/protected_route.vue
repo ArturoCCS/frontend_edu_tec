@@ -8,11 +8,9 @@ import UserCard from '@/components/UserCard.vue';
 </script> -->
 
 <template>
-  <div>
-    <BlogForm />
-  </div>
+  <BlogForm />
 </template>
 
 <script setup>
-import BlogForm from '../components/Blog/BlogForm.vue';
+import BlogForm from '../components/Blog/Create/BlogForm.vue';
 </script>

@@ -26,20 +26,26 @@ export const useUserStore = defineStore('user', {
         };
       }
     },
-    async checkPermission(){
+  async checkPermission(){
       try{
         const response = await axios.get('http://localhost:3000/plataform/protected-route', { 
           withCredentials: true 
         });
         this.permissions = response.data.permissions; 
+        localStorage.setItem('permissions', JSON.stringify(this.permissions));
         return { status: response.data.status , message: response.data.message };
       } catch (error) {
+        this.permissions = [];
+        localStorage.removeItem('permissions');
         return { 
           status: 'error', 
           message: error.response?.data?.message || 'Error al verificar permisos' 
         };
       }
-  
+    },
+    loadFromLocalStorage() {
+      this.permissions = JSON.parse(localStorage.getItem('permissions')) || [];
+      this.user = JSON.parse(localStorage.getItem('user')) || null;
     }
       
   }

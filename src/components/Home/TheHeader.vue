@@ -1,8 +1,6 @@
 <template>
   <div>
-
     <v-row>
-
       <v-col cols="6" class="CG  texto" v-motion-slide-right >
         <p class="text-black title-init" >
           Bienvenido a tu portal
@@ -17,12 +15,14 @@
           Nuestro catálogo de libros educativos y blocs escolares está diseñado
           para acompañar tu proceso de enseñanza y aprendizaje, brindando calidad y variedad.
         </p>
+        <v-btn :to="'/'" class="text-none text-white mx-11 mt-15" color="black" min-width="92" rounded v-motion-slide-visible-left>
+          Explorar
+        </v-btn>
       </v-col>
 
       <v-col  cols="6"
         class="CG">
          <v-row>
-          
             <v-col cols="10">
               <div class="book-3d-wrapper" :key="bookKey" v-motion-slide-visible-right 
                   contain style="
@@ -52,11 +52,6 @@
           </v-row>
       </v-col>
     </v-row>
-
-   
-
-
-
       <div class="cuadro1" :style="{ background: $vuetify.theme.themes.light.colors.secondary }">
             <v-img src="/tecnm.png" class="logo-tecnm"
             contain style="
@@ -76,8 +71,12 @@
 </template>
 
 <script setup>
+
+import { useAuthStore } from '@/stores/authStore.js';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import Book3D from '../Utils/Book3D.vue';
+
+const authStore = useAuthStore();
 
 const windowWidth = ref(window.innerWidth);
 
@@ -203,11 +202,6 @@ const bookSize = computed(() => {
 }
 
 @media (max-width: 600px) {
-  /* .book-3d-wrapper {
-    min-height: 250px;
-    right: 50px;
-    top: -450px;
-  }*/
   
   .logo-tecnm {
     width: 30% !important;
@@ -218,7 +212,6 @@ const bookSize = computed(() => {
   .cuadro90 {
     display: none;
   }
-
   
   .cuadro1{
     width: 75%;
@@ -229,14 +222,12 @@ const bookSize = computed(() => {
     top: 65% !important;
   }
 
-.title-init {
-  margin-left: 30px;
-}
-.descrip-init {
-  margin-left: 30px;
-}
-
-
+  .title-init {
+    margin-left: 30px;
+  }
+  .descrip-init {
+    margin-left: 30px;
+  }
 
 }
 </style>

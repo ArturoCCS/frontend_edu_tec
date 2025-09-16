@@ -33,8 +33,8 @@
             </v-card>
           </v-col>
         </v-row>
-        <v-btn class="text-none text-white mr-6 mx-8" color="black" min-width="92" rounded v-motion-slide-visible-left>
-          Boton
+        <v-btn :to="'/listaBlogs'" class="text-none text-white mx-11" color="black" min-width="92" rounded v-motion-slide-visible-left>
+          Explorar
         </v-btn>
       </v-col>
       <v-col cols="5" style="position: relative; z-index: 2;">

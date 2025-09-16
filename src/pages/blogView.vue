@@ -17,10 +17,10 @@
 </template>
 
 <script setup>
-import BlogContent from '@/components/Blog/BlogContent.vue'
-import PageSidebar from '@/components/Blog/PageSidebar.vue'
-import SidebarNav from '@/components/Blog/SidebarNav.vue'
-import ThemeSwitcher from '@/components/Blog/ThemeSwitcher.vue'
+import BlogContent from '@/components/Blog/View/BlogContent.vue'
+import PageSidebar from '@/components/Blog/View/PageSidebar.vue'
+import SidebarNav from '@/components/Blog/View/SidebarNav.vue'
+import ThemeSwitcher from '@/components/Blog/View/ThemeSwitcher.vue'
 
 import axios from 'axios'
 import { onMounted, ref } from 'vue'

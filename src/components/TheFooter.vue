@@ -32,7 +32,7 @@
             </div>
             <div>
               <div class="ml-8 mt-10 footer-icons">
-                <v-btn v-for="icon in icons" :key="icon" :icon="icon.icon" :href="icon.link" target="_blank"
+                <v-btn v-for="icon in icons" :key="icon" :icon="icon.icon" :href="icon.link" target="_blank" color="#232323"
                   class="mx-1" :style="{ color: $vuetify.theme.themes.light.colors.primary }" />
               </div>
             </div>

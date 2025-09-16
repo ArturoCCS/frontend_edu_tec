@@ -1,0 +1,332 @@
+
+h3 {
+  font-size: 0.9em;
+  font-weight: 700;
+  margin: 8px 15px;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 20px;
+}
+
+.separador-capitulo {
+  margin: 24px 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+.editor-center {
+  padding: 2em 2em;
+  overflow-y: auto;
+}
+.chapter-list-nav, .section-list-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  position: relative;
+}
+
+.section-btn {
+  background: #f1f7ff;
+}
+.chapter-title-input, .section-title-input {
+  border: none;
+  background: transparent;
+  font-size: 1.1em;
+  outline: none;
+  width: 120px;
+  overflow: hidden; 
+  color: #006be6;
+  font-weight: 600;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+
+}
+
+
+.chapter-title-input-seccion {
+  z-index: 10;
+  font-size: 0.85em;
+  color: #333;
+  letter-spacing: 0.5px;
+  flex: 1;
+  padding-right: 38px;
+  font-family: "Segoe UI", "Arial", sans-serif;
+  font-weight: 500;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.54);
+  white-space: normal;
+  word-break: break-word;
+  overflow: hidden; 
+}
+.chapter-btn {
+    display: flex;
+    align-items: center;
+    background: #f3f8fef1;
+    border: none;
+    border-radius: 7px;
+    padding: 10.52px 25px;
+    font-size: 1em;
+    margin: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+}
+
+.chapter-btn.selected {
+  background: #e8f2fd;    
+}
+
+.chapter-btn-wrapper {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  background: #f5f6f7;
+  border: none;
+  border-radius: 7px;
+  padding: .5em 1em;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.18s, color 0.18s;
+}
+
+
+.btn-danger {
+  background: #ef4444; color: #fff; border-radius: 6px; border: none; padding: .3em .7em;
+  font-weight: bold; cursor: pointer; margin-left: auto;
+}
+.btn-secondary { background: #9333ea; color: #fff; padding: 0.4em 1em; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; margin: 0.6em 0; }
+.blog-form label { margin-top: 0.5em; font-weight: bold; }
+.blog-form input, .blog-form textarea, .blog-form select { width: 100%; margin-bottom: 0.5em; }
+.empty-center-msg { text-align: center; color: #bbb; margin-top: 4em; }
+
+
+/* From Uiverse.io by vinodjangid07 */ 
+
+.Btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  right: 0;
+  margin-top:10px;
+  border-radius: 50%;
+  background-color: #252525;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.11);
+}
+
+.svgIcon {
+  fill: rgb(214, 178, 255);
+}
+
+
+.tooltip {
+  position: absolute;
+  font-size: 0.8em;
+  right: -90px;
+  bottom: 35px;
+  z-index: 10;
+  opacity: 0;
+  background-color: rgb(12, 12, 12);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition-duration: .2s;
+  pointer-events: none;
+  letter-spacing: 0.5px;
+}
+
+
+
+.Btn:hover .tooltip {
+  opacity: 1;
+  transition-duration: .3s;
+}
+
+.Btn:hover {
+  background-color: rgb(94, 99, 255);
+  transition-duration: .3s;
+}
+
+.Btn:hover .icon2 {
+  border-bottom: 2px solid rgb(235, 235, 235);
+  border-left: 2px solid rgb(235, 235, 235);
+  border-right: 2px solid rgb(235, 235, 235);
+}
+
+
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+
+.btn-add-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #9333ea;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.4em 0.7em;
+  margin-bottom: 1em;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: background 0.18s;
+}
+.btn-add-section:hover {
+  background: #7c29cf;
+}
+.icon-plus {
+  display: block;
+}
+.ce-header{
+  padding: 0 0 3px !important;
+}
+
+.drag-handle {
+    position: absolute;
+    font-size: 1.2em;
+    color: #888;
+    user-select: none;
+    left: 10px;
+    cursor: grab;
+}
+
+.tab-note-title-input {
+  flex: 1 1 auto;
+  border: none;
+  border-radius: 7px;
+  font-size: 0.9em;
+  
+
+  padding: 0.2em 0.4em;
+  font-weight: 500;
+  color: #333;
+  outline: none;
+  min-width: 0;
+  resize: none;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;
+  height: auto;
+  min-height: 52px;
+  max-height: 90px;
+  transition: background 0.15s;
+}
+
+.tab-note-title-input:focus {
+  background: #9b9b9b27;
+}
+
+
+
+.btn-delete-section {
+  background: transparent;
+  border: none;
+  color: #888;
+  padding-top: 0.2em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+}
+.btn-delete-section:hover {
+  background: #9b9b9b27
+}
+:root{
+  --ea-bg: #f8fafc;
+  --ea-border: #d7dbe2;
+  --ea-border-hover: #cfd6e0;
+  --ea-blue: #3b82f6;
+  --ea-blue-ring: rgba(59,130,246,.22);
+  --ea-text: #0f172a;
+  --ea-muted: #64748b;
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --ea-bg: #0f172a;
+    --ea-border: #334155;
+    --ea-border-hover: #425269;
+    --ea-blue: #60a5fa;
+    --ea-blue-ring: rgba(96,165,250,.28);
+    --ea-text: #e5e7eb;
+    --ea-muted: #94a3b8;
+  }
+}
+
+.editor-group{
+     margin-left: -1.1px;
+}
+
+.editor-header{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin: -10px 2px 0;
+}
+
+.editor-eyebrow{
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--ea-muted);
+}
+
+.editor-subtitle{
+    max-width: 60%;
+    color: var(--ea-muted);
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.editor-surface{
+  margin-top: -4.7px;
+  border-radius: 5px;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+
+.editor-surface:hover{
+  border-color: var(--ea-border-hover);
+}
+
+.editor-group:focus-within .editor-surface{
+  border-color: var(--ea-blue);
+  box-shadow: 0 0 0 3px var(--ea-blue-ring);
+}
+.editor-group:focus-within .editor-eyebrow{
+  color: var(--ea-blue);
+}
+
+
+.editor-surface .ce-block__content{
+  max-width: 100%;
+}
+.editor-surface .ce-paragraph[data-placeholder]:empty::before{
+  opacity: .6;
+}

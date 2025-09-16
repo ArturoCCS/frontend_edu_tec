@@ -36,6 +36,14 @@
         <div class="portfolio-card-body">
           <h3 class="portfolio-card-title">{{ blog.Titulo }}</h3>
           <p class="portfolio-card-desc">{{ blog.Descripcion }}</p>
+          <p class="portfolio-card-desc">
+            <span v-if="autorNombres[blog.id_usuario]">
+              Autor: {{ autorNombres[blog.id_usuario] }}
+            </span>
+            <span v-else>
+              Autor desconocido
+            </span>
+          </p>
           <p class="portfolio-card-desc">{{ formateaFecha(blog.Fecha_Creacion) }}</p>
           <i class="fa-solid fa-arrow-right portfolio-card-arrow"></i>
         </div>
@@ -49,6 +57,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import axios from 'axios'
 import { computed, onMounted, ref, watch } from 'vue'
@@ -61,6 +70,8 @@ const loading = ref(true)
 const page = ref(1)
 const perPage = 8
 const search = ref("")
+
+const autorNombres = ref({})
 
 function normalizaTexto(texto) {
   return texto
@@ -98,17 +109,29 @@ function formateaFecha(fechaStr) {
     day: 'numeric'
   });
 }
+
 onMounted(async () => {
   loading.value = true
   try {
     const res = await axios.get('http://localhost:3000/plataform/')
-    setTimeout(() => {
-      blogs.value = res.data
-      loading.value = false
-    }, 1000)
-  } catch {
+    blogs.value = res.data
+
+    const idsAutores = [...new Set(res.data.map(blog => blog.id_usuario))]
+    const idsValidos = idsAutores.filter(id => id !== undefined && id !== null)
+
+    const nombresPromises = idsValidos.map(async id => {
+      try {
+        const res = await axios.get(`http://localhost:3000/user/${id}`)
+        autorNombres.value[id] = res.data.name || res.data.nombre || res.data.user?.name || 'Autor desconocido'
+      } catch (error) {
+        autorNombres.value[id] = 'Autor desconocido'
+      }
+    })
+    await Promise.all(nombresPromises)
+    loading.value = false
+  } catch (error) {
+    console.error(error)
     loading.value = false
   }
 })
 </script>
-=

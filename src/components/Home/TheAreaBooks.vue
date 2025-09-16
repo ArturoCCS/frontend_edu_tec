@@ -18,6 +18,11 @@
             ¡Encuentra el libro que necesitas para impulsar tu formación y alcanzar tus metas!
           </span>
         </p>
+
+        <v-btn :to="'/listaLibros'" class="text-none text-white mt-7 mx-12" color="black" min-width="92" rounded v-motion-slide-visible-left>
+          Explorar
+        </v-btn>
+      
       </v-col>
 
       <v-col class="card-books" >
