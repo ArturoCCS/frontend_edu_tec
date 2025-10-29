@@ -43,7 +43,6 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  font-family: 'Inter', 'Montserrat', Arial, sans-serif;
   text-align: center;
 }
 
@@ -52,12 +51,6 @@ onMounted(() => {
   animation: fadeIn 1s;
 }
 
-h3 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin: 0 0 1rem 0;
-  letter-spacing: 2px;
-}
 
 p {
   font-size: 1.2rem;

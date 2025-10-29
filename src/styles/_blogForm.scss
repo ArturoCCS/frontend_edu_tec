@@ -2,7 +2,7 @@
 h3 {
   font-size: 0.9em;
   font-weight: 700;
-  margin: 8px 15px;
+  margin: 11.5px 15px;
   position: relative;
   z-index: 1;
   margin-bottom: 20px;
@@ -37,21 +37,16 @@ h3 {
   overflow: hidden; 
   color: #006be6;
   font-weight: 600;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-
 }
 
 
 .chapter-title-input-seccion {
   z-index: 10;
-  font-size: 0.85em;
+  font-size: 0.7em;
   color: #333;
   letter-spacing: 0.5px;
   flex: 1;
-  padding-right: 38px;
-  font-family: "Segoe UI", "Arial", sans-serif;
   font-weight: 500;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.54);
   white-space: normal;
   word-break: break-word;
   overflow: hidden; 
@@ -64,14 +59,14 @@ h3 {
     border-radius: 7px;
     padding: 10.52px 25px;
     font-size: 1em;
-    margin: 5px;
+    margin: 4.9px;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.18s, color 0.18s;
 }
 
 .chapter-btn.selected {
-  background: #e8f2fd;    
+  background: #deeeff;    
 }
 
 .chapter-btn-wrapper {
@@ -276,7 +271,7 @@ h3 {
 }
 
 .editor-group{
-     margin-left: -1.1px;
+    margin-left: -1.1px;
 }
 
 .editor-header{
@@ -284,7 +279,7 @@ h3 {
   align-items: baseline;
   justify-content: space-between;
   gap: 10px;
-  margin: -10px 2px 0;
+  margin-bottom: 3px;
 }
 
 .editor-eyebrow{
@@ -309,22 +304,19 @@ h3 {
   margin-top: -4.7px;
   border-radius: 5px;
   transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+  -webkit-transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+  -moz-transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+  -ms-transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+  -o-transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
 }
 
-.editor-surface:hover{
-  border-color: var(--ea-border-hover);
-}
-
-.editor-group:focus-within .editor-surface{
-  border-color: var(--ea-blue);
-  box-shadow: 0 0 0 3px var(--ea-blue-ring);
-}
-.editor-group:focus-within .editor-eyebrow{
-  color: var(--ea-blue);
-}
 
 
 .editor-surface .ce-block__content{
+  max-width: 100%;
+}
+
+.ce-block__content{
   max-width: 100%;
 }
 .editor-surface .ce-paragraph[data-placeholder]:empty::before{

@@ -1,8 +1,12 @@
+<template>
+  <div :id="holder" :class="{ 'read-only': readOnly }"></div>
+</template>
+
 <script setup>
 import EditorJS from '@editorjs/editorjs'
-import { defineEmits, defineProps, onBeforeUnmount, onMounted, ref, toRaw, watch } from 'vue'
+import { defineEmits, defineProps, onBeforeUnmount, onMounted, ref, toRaw } from 'vue'
 
-// Parte de EditorJS
+import spoiler from '@clefermy/editorjs-spoiler'
 import Code from '@editorjs/code'
 import Embed from '@editorjs/embed'
 import Header from '@editorjs/header'
@@ -15,7 +19,6 @@ import Raw from '@editorjs/raw'
 import Table from '@editorjs/table'
 import Warning from '@editorjs/warning'
 
-// Extras que no pertenecen a EditorJS
 import BackgroundColorInlineTool from './editorjs-tools/BackgroundColorInlineTool.js'
 import BackgroundTune from './editorjs-tools/BackgroundTune.js'
 import InteractiveChecklist from './editorjs-tools/InteractiveChecklist.js'
@@ -30,9 +33,16 @@ const props = defineProps({
   holder: { type: String, default: 'editor-js-holder' },
   readOnly: { type: Boolean, default: false },
   autofocus: { type: Boolean, default: true },
-  placeholder: { type: String, default: 'Escribe aquí…' }
+  placeholder: { type: String, default: 'Escribe aquí…' },
+  editorGroupId: { type: String, required: true },
+  activeEditorGroupId: { type: [String, null], required: true }
 })
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits([
+  'update:modelValue',
+  'set-active-group',
+  'clear-active-group'
+])
+
 const editor = ref(null)
 
 function normalizeData(val) {
@@ -40,7 +50,13 @@ function normalizeData(val) {
   if (typeof val === 'string') { try { return JSON.parse(val) } catch { return { time: Date.now(), blocks: [] } } }
   return toRaw(val)
 }
-function destroyEditor() { if (editor.value) { editor.value.destroy(); editor.value = null } }
+
+function destroyEditor() {
+  if (editor.value) {
+    editor.value.destroy();
+    editor.value = null;
+  }
+}
 
 const palette = [
   '#111827','#1f2937','#374151','#6b7280','#9ca3af','#d1d5db','#f3f4f6','#ffffff',
@@ -75,7 +91,7 @@ function buildTools() {
       tunes: ['background'],
       config: { services: { youtube: true, codepen: true, instagram: true, twitter: true } }
     },
-    
+    spoiler: spoiler,
     underline: UnderlineInlineTool,
     strikethrough: StrikethroughInlineTool,
     inlineCode: InlineCode,
@@ -90,8 +106,8 @@ function buildTools() {
 
 function initEditor() {
   destroyEditor()
+  
   const initialData = migrateYouTubeParagraphs(normalizeData(props.modelValue))
-
   editor.value = new EditorJS({
     holder: props.holder,
     tools: buildTools(),
@@ -107,35 +123,27 @@ function initEditor() {
   })
 }
 
-
 onMounted(() => {
-  initEditor();
-  setTimeout(() => {
-    document.querySelectorAll('.ce-popover-item__title').forEach(el => {
-      if (el.textContent.trim() === 'Checklist (lector)') {
-        el.parentElement.setAttribute('title', 'Este check puede ser clickeado por el usuario');
-      }
-    });
-  }, 100);
-   setTimeout(() => {
-    document.querySelectorAll('.ce-popover-item__title').forEach(el => {
-      if (el.textContent.trim() === 'Checklist') {
-        el.parentElement.setAttribute('title', 'Este check "No" puede ser clickeado por el usuario en lectura');
-      }
-    });
-  }, 100);
-});
-onBeforeUnmount(destroyEditor)
+  initEditor()
+  const holderEl = document.getElementById(props.holder)
+  if (holderEl) {
+    holderEl.addEventListener('mousedown', () => {
+      emit('set-active-group', props.editorGroupId)
+    })
+    holderEl.addEventListener('focusin', () => {
+      emit('set-active-group', props.editorGroupId)
+    })
+  }
+})
 
-watch(() => [props.readOnly], initEditor)
+onBeforeUnmount(() => {
+  destroyEditor()
+})
+
+
 </script>
 
-<template>
-  <div :id="holder" :class="{ 'read-only': readOnly }"></div>
-</template>
-
 <style>
-
 .read-only .ce-popover,
 .read-only .ce-toolbar,
 .read-only .ce-inline-toolbar,
@@ -148,7 +156,6 @@ watch(() => [props.readOnly], initEditor)
   width: 100%;
   max-width: 100%;
 }
-
 .ce-block .embed-tool iframe, .ce-block .cdx-embed iframe {
   display: block;
   width: 100%;
@@ -169,7 +176,6 @@ watch(() => [props.readOnly], initEditor)
   box-shadow: 0 6px 24px rgba(0,0,0,0.12);
   z-index: 9999;
 }
-
 .bg-tune__swatch {
   width: 22px;
   height: 22px;
@@ -181,4 +187,5 @@ watch(() => [props.readOnly], initEditor)
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
+
 </style>

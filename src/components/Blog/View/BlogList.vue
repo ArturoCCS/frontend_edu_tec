@@ -1,137 +1,157 @@
 <template>
-  <div class="blog-portfolio-container">
-    <div v-if="loading">
-      <div class="skeleton-title" style="margin-bottom: 24px; width: 36%; height: 36px;"></div>
-      <div class="skeleton-input" style="margin-bottom: 24px; width: 340px; height: 38px;"></div>
-    </div>
-    <div v-else>
-      <h2 class="portfolio-title">Listado de Blogs</h2>
-      <input
-        v-model="search"
-        type="search"
-        class="portfolio-search"
-        placeholder="Buscar blog por título o descripción..."
-      />
-    </div>
-
-    <div v-if="loading" class="portfolio-grid">
-      <div v-for="n in perPage" :key="n" class="portfolio-card skeleton-card">
-        <div class="portfolio-tab skeleton-tab"></div>
-        <div class="portfolio-card-body">
-          <div class="skeleton-title"></div>
-          <div class="skeleton-desc"></div>
-          <div class="skeleton-link"></div>
+  <div
+    class="blog-portfolio-container dark-surface"
+    ref="root"
+    @pointerdown.capture="soundStore.tryResume()"
+    @wheel.capture.passive="soundStore.tryResume()"
+    @keydown.capture="soundStore.tryResume()"
+  >
+    <header class="header">
+      <div class="title-wrap">
+        <div class="title-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h3.9a2.5 2.5 0 0 1 1.77.73l.82.82H18.5A2.5 2.5 0 0 1 21 8v8.5A3.5 3.5 0 0 1 17.5 20h-11A3.5 3.5 0 0 1 3 16.5V6.5Z" fill="url(#g1)"/>
+            <defs><linearGradient id="g1" x1="3" y1="4" x2="21" y2="20"><stop stop-color="#7C3AED" /><stop offset="1" stop-color="#06B6D4" /></linearGradient></defs>
+          </svg>
+        </div>
+        <div>
+          <h2 class="portfolio-title">Listado de Blogs</h2>
+          <p class="portfolio-subtitle">Secciones personalizadas y dinámicas</p>
         </div>
       </div>
-    </div>
 
-    <div v-else class="portfolio-grid">
-      <a
-        v-for="blog in paginatedBlogs"
-        :key="blog.ID_Blog"
-        class="portfolio-card"
-        :href="`${blogBaseUrl}${blog.ID_Blog}`"
-        style="text-decoration:none; color:inherit;"
+      <div class="toolbar">
+        <input v-model="q" type="search" class="portfolio-search" placeholder="Buscar por título, tema, tag..." />
+      </div>
+    </header>
+
+    <div class="sections">
+      <RowSlider
+        v-for="sec in sectionsStore.sections"
+        :key="sec.key"
+        :title="sec.title"
+        :items="sec.items"
+        :cell-width="'clamp(280px, 30vw, 340px)'"
+        :step-factor="0.9"
+        :min-step="320"
+        :always-show-edges="false"
+        :end-padding-right="'clamp(10px, 4vw, 30px)'"
+        v-sfx:appear.sequence="{
+          items: sec.items?.length || 10,
+          totalMs: 360,
+          startDelayMs: 70,
+          groupMin: 1,
+          groupMax: 3,
+          jitterMs: 22,
+          rateFrom: 1.00,
+          rateTo: 1.14,
+          volumeFrom: 0.60,
+          volumeTo: 0.9
+        }"
+        v-sfx:tick.scroll="{ stepPx: 180, minGapMs: 70 }"
       >
-        <div class="portfolio-card-body">
-          <h3 class="portfolio-card-title">{{ blog.Titulo }}</h3>
-          <p class="portfolio-card-desc">{{ blog.Descripcion }}</p>
-          <p class="portfolio-card-desc">
-            <span v-if="autorNombres[blog.id_usuario]">
-              Autor: {{ autorNombres[blog.id_usuario] }}
-            </span>
-            <span v-else>
-              Autor desconocido
-            </span>
-          </p>
-          <p class="portfolio-card-desc">{{ formateaFecha(blog.Fecha_Creacion) }}</p>
-          <i class="fa-solid fa-arrow-right portfolio-card-arrow"></i>
-        </div>
-      </a>
-    </div>
-
-    <div v-if="!loading && totalPages > 1" class="portfolio-pagination">
-      <button :disabled="page === 1" @click="page--">&lt;</button>
-      <span>Página {{ page }} de {{ totalPages }}</span>
-      <button :disabled="page === totalPages" @click="page++">&gt;</button>
+        <template #card="{ item, index }">
+          <div class="reveal" :style="{ '--d': revealDelay(sec.key, index) + 'ms' }">
+            <TemplateSelector
+              :template="templateFor(item)"
+              :title="item.Titulo || item.title"
+              :description="item.Descripcion || item.description"
+              :author="'Autor'"
+              :date="formatDate(item.Fecha_Creacion || item.createdAt)"
+              :colors="colorFor(item.Titulo || item.title || item.ID_Blog || item.id || index)"
+              :to="blogBaseUrl + (item.ID_Blog || item.id)"
+            />
+          </div>
+        </template>
+      </RowSlider>
     </div>
   </div>
 </template>
 
 <script setup>
-import axios from 'axios'
-import { computed, onMounted, ref, watch } from 'vue'
+import { useSectionsStore } from '@/stores/sectionsStore'
+import { useSoundStore } from '@/stores/soundStore'
+import { colorFor } from '@/utils/palette'
+import { makePlacementPlan } from '@/utils/placementWave'
+import { sfx as vSfx } from '@/utils/sfx_directive.js'
+import { onMounted, ref, watch } from 'vue'
+import TemplateSelector from './ListBlogs/FolderRenderer.vue'
+import RowSlider from './ListBlogs/RowSlider.vue'
 
-const blogBaseUrl = import.meta.env.VITE_BLOG_URL
+const blogBaseUrl = import.meta.env.VITE_BLOG_URL || '/blogs/'
+const sectionsStore = useSectionsStore()
+const soundStore = useSoundStore()
 
-const blogs = ref([])
-const loading = ref(true)
+const q = ref('')
 
-const page = ref(1)
-const perPage = 8
-const search = ref("")
-
-const autorNombres = ref({})
-
-function normalizaTexto(texto) {
-  return texto
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-}
-
-const filteredBlogs = computed(() => {
-  if (!search.value.trim()) return blogs.value
-  const query = normalizaTexto(search.value)
-  return blogs.value.filter(blog => {
-    return (
-      normalizaTexto(blog.Titulo ?? "").includes(query) ||
-      normalizaTexto(blog.Descripcion ?? "").includes(query)
-    )
-  })
-})
-
-const paginatedBlogs = computed(() => {
-  const start = (page.value - 1) * perPage
-  const end = start + perPage
-  return filteredBlogs.value.slice(start, end)
-})
-const totalPages = computed(() => Math.max(1, Math.ceil(filteredBlogs.value.length / perPage)))
-
-watch(search, () => { page.value = 1 })
-
-function formateaFecha(fechaStr) {
-  if (!fechaStr) return "";
-  const fecha = new Date(fechaStr.replace(' ', 'T'));
-  return fecha.toLocaleString('es-ES', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-}
-
-onMounted(async () => {
-  loading.value = true
-  try {
-    const res = await axios.get('http://localhost:3000/plataform/')
-    blogs.value = res.data
-
-    const idsAutores = [...new Set(res.data.map(blog => blog.id_usuario))]
-    const idsValidos = idsAutores.filter(id => id !== undefined && id !== null)
-
-    const nombresPromises = idsValidos.map(async id => {
-      try {
-        const res = await axios.get(`http://localhost:3000/user/${id}`)
-        autorNombres.value[id] = res.data.name || res.data.nombre || res.data.user?.name || 'Autor desconocido'
-      } catch (error) {
-        autorNombres.value[id] = 'Autor desconocido'
+const plans = ref(new Map())
+function buildPlans() {
+  const m = new Map()
+  for (const sec of sectionsStore.sections || []) {
+    const plan = makePlacementPlan({
+      itemsCount: sec.items?.length || 0,
+      totalMs: 360,
+      startDelayMs: 70,
+      jitterMs: 22,
+      groupMin: 1,
+      groupMax: 3,
+      accelK: 1.35
+    })
+    const delays = []
+    let pos = 0
+    plan.scheduleMs.forEach((ms, i) => {
+      const g = plan.groupSizes[i]
+      for (let k = 0; k < g && pos < (sec.items?.length || 0); k++) {
+        delays[pos] = Math.max(0, Math.round(ms))
+        pos++
       }
     })
-    await Promise.all(nombresPromises)
-    loading.value = false
-  } catch (error) {
-    console.error(error)
-    loading.value = false
+    m.set(sec.key, delays)
   }
+  plans.value = m
+}
+function revealDelay(secKey, index) {
+  const d = plans.value.get(secKey)?.[index]
+  return typeof d === 'number' ? d : 0
+}
+
+const TEMPLATES = ['classic', 'glass']
+function hashStr(s) { s = String(s || ''); let h = 0; for (let i = 0; i < s.length; i++) { h = (h << 5) - h + s.charCodeAt(i); h |= 0 } return Math.abs(h) }
+function pickTemplateFor(item) { const key = item?.ID_Blog || item?.id || item?.Titulo || item?.title || JSON.stringify(item); return TEMPLATES[hashStr(key) % TEMPLATES.length] }
+function templateFor(item) { return pickTemplateFor(item) }
+function formatDate(d) { if (!d) return ''; const date = new Date(String(d).replace(' ', 'T')); return date.toLocaleString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) }
+
+let t = 0
+watch(q, (val) => {
+  clearTimeout(t)
+  t = setTimeout(() => {
+    sectionsStore.setQuery(val)
+    sectionsStore.fetchSections({ q: val })
+  }, 250)
 })
+
+onMounted(() => {
+  sectionsStore.fetchSections()
+  soundStore.ensureAudio()
+  soundStore.loadSounds()
+  soundStore.resumeOnFirstInteraction()
+})
+
+watch(() => sectionsStore.sections, () => buildPlans(), { deep: true, immediate: true })
 </script>
+
+<style scoped>
+.dark-surface { min-height: 100%; padding: 32px 10px 56px 40px; }
+.header { display: grid; gap: 12px; margin-bottom: 14px; }
+.title-wrap { display: flex; align-items: center; gap: 12px; }
+.title-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 10px; background: linear-gradient(160deg, rgba(124,58,237,.24), rgba(14,165,233,.18)); box-shadow: 0 6px 24px rgba(79,70,229,.16) inset, 0 1px 0 rgba(255,255,255,.06); }
+.portfolio-title { margin: 0; font-size: 24px; font-weight: 700; }
+.portfolio-subtitle { margin: 2px 0 0; color: #64748b; font-size: 13px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.portfolio-search { width: min(520px, 100%); background: white; border: 1px solid #1f2937; border-radius: 12px; color: #0b1220; padding: 10px 12px; }
+
+.sections { display: grid; gap: 28px; }
+
+.reveal { animation: rIn .22s ease-out both; }
+@keyframes rIn { from{opacity:0; transform: translateY(6px) scale(0.98);} to{opacity:1; transform:none;} }
+</style>

@@ -53,8 +53,7 @@ const routes = [
  {
   path: '/listaBlogs/',
   name:'ListadoBlog',
-  component: BlogList,
-  meta: { requiresAuth: true }
+  component: BlogList
  },
  {
   path: '/about',

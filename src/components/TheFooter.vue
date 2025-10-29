@@ -55,9 +55,12 @@
           </v-col>
         </v-row>
       </v-col>
+ 
       <div :style="{ '--primary': $vuetify.theme.themes.light.colors.primary }" class="px-4 py-4 bgCol text-center w-100 text-white" />
     </v-row>
+    
   </v-footer>
+  
 </template>
 
 <script setup>

@@ -11,6 +11,7 @@ app.use(pinia)
 
 import { useAuthStore } from '@/stores/authStore.js'
 import { useUserStore } from '@/stores/userStore.js'
+import { sfx } from '@/utils/sfx.js'
 const authStore = useAuthStore()
 const userStore = useUserStore()
 authStore.loadFromLocalStorage()
@@ -35,5 +36,6 @@ axios.interceptors.response.use(
   }
 )
 
+app.directive('sfx', sfx)
 registerPlugins(app)
 app.mount('#app')

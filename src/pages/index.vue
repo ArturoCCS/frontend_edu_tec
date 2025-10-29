@@ -1,4 +1,8 @@
 <template>
+     <div class="bg-lattice" aria-hidden="true"></div>
+    <div class="bg-symbols" aria-hidden="true">
+       <img class="sym o" src="/tecnm.png" alt=""/>
+    </div>
   <TheHeader />
   <TheAreaBooks />
   <TheAreaVideos/>

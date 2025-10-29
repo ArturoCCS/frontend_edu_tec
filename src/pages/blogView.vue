@@ -6,13 +6,20 @@
         @capituloSeleccionado="seleccionarCapitulo" />
       <ThemeSwitcher />
     </aside>
-    <main class="blog-main">
+
+    <main class="blog-main" style="padding: 17.5px 19.5px;">
       <BlogContent :blog="blog" :capitulo="capituloSeleccionado" :capitulos="capitulos" @navigate="handleNavigate" />
     </main>
+
     <aside class="page-sidebar">
       <PageSidebar :secciones="capituloSeleccionado?.secciones || []" />
     </aside>
 
+    <ChatbotWidget
+      :blog="blog"
+      :capitulos="capitulos"
+      :capitulo="capituloSeleccionado"
+    />
   </div>
 </template>
 
@@ -21,6 +28,8 @@ import BlogContent from '@/components/Blog/View/BlogContent.vue'
 import PageSidebar from '@/components/Blog/View/PageSidebar.vue'
 import SidebarNav from '@/components/Blog/View/SidebarNav.vue'
 import ThemeSwitcher from '@/components/Blog/View/ThemeSwitcher.vue'
+
+import ChatbotWidget from '@/components/Chat/ChatbotWidget.vue'
 
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
@@ -44,14 +53,9 @@ onMounted(async () => {
       capitulo.secciones = seccionesData
     }
 
-    if (blog.value.Tipo === 'documentacion') {
+    if (blog.value.Tipo === 'documentacion' || blog.value.Tipo === 'simple') {
       if (capitulos.value.length > 0) {
         capituloSeleccionado.value = capitulos.value[0]
-      }
-    } else if (blog.value.Tipo === 'simple') {
-      if (capitulos.value.length > 0) {
-        capituloSeleccionado.value = capitulos.value[0]
-
       }
     }
   } catch (err) {

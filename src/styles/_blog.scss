@@ -8,7 +8,6 @@ $secondary: #fff;
   
   display: flex;
   min-height: 100vh;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   background:  var(--secondary);
   border-radius: 7px;
   box-shadow: 9px 12px 20px 4px rgba(0, 0, 0, 0.13), 7px 7px 12px 2px rgba(0, 0, 0, 0.08), 0 2px 0px 0px #eee;
@@ -46,7 +45,7 @@ $secondary: #fff;
 .blog-main {
   flex: 2 1 25%;
   min-width: 0;
-  padding: 5px 20px;
+  padding: 0 20px  17.5px 20px;
   border: 1px solid #b5acac;
 }
 .page-sidebar {
@@ -79,7 +78,7 @@ $secondary: #fff;
 }
 
 .capitulo-activo {
-  background-color: #f0f7ff;
+  background-color: #deeeff;
   color: #006be6;
 
 }
@@ -87,12 +86,12 @@ $secondary: #fff;
 .capitulo-btn {
   width: 100%;
   text-align: left;
-  padding: 10.5px 24px;
+  padding: 6px 24px;
   border: none;
   background: transparent;
   color: inherit;
   font: inherit;
-  font-size: 1.1em;
+  font-size: .8em;
   border-radius: 0.375rem;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
@@ -173,7 +172,6 @@ $secondary: #fff;
   font-size: 0.8em;
   color: #444;
   letter-spacing: 1px;
-  font-family: 'Courier New', Courier, monospace;
   background: rgba(255, 255, 255, 0.18);
   border-radius: 0 0 18px 12px;
   z-index: 3;
@@ -183,14 +181,11 @@ $secondary: #fff;
 
 .tab-note-title {
   z-index: 10;
-  font-size: 0.85em;
+  font-size: 0.7em;
   color: #333;
   letter-spacing: 0.5px;
   flex: 1;
-  padding-right: 38px;
-  font-family: 'Segoe UI', 'Arial', sans-serif;
   font-weight: 500;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.54);
   white-space: normal;
   word-break: break-word;
   overflow: visible;
@@ -278,3 +273,15 @@ $secondary: #fff;
 .chapter-gap {
   flex: 1;
 }
+
+.chat-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: #111827; color: #fff; border: none; cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
+  z-index: 9999;
+}
+.chat-fab:hover { filter: brightness(1.1) }

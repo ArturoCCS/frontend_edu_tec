@@ -1,6 +1,5 @@
 
 .blog-portfolio-container {
-  max-width: 95%;
   margin: 0 auto;
   padding: 32px 12px;
 }
@@ -30,7 +29,7 @@
   padding-top: 10px;
 }
 .portfolio-card:hover:not(.skeleton-card) {
-  box-shadow: 0 8px 28px 0 rgba(18,18,22,0.13);
+  box-shadow: 0 8px 28px 0 #acb3c4;
   transform: scale(1.03) translateY(-2px);
 }
 
@@ -173,7 +172,6 @@
   border: 1px solid #bdbdbd;
   background: #f8f8f8;
   font-size: 1em;
-  font-family: inherit;
 }
 
 .skeleton-title {

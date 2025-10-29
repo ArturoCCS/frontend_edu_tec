@@ -10,7 +10,6 @@
             @click.prevent="scrollToSeccion(seccion.ID_Seccion)"></a>
         </li>
       </ul>
-      <div class="notes-spacer" :style="`height: ${secciones.length * 80}px;`"></div>
     </div>
     <hr />
 

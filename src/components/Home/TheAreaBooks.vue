@@ -1,25 +1,26 @@
 <template>
-  <div style="height: 600px; width: 100%;" :style="{ background: $vuetify.theme.themes.light.colors.secondary }">
-    <div class="cuadro4" :style="{ background: $vuetify.theme.themes.light.colors.primary }">
+  <div style="height: 700px; width: 100%;" :style="{ background: $vuetify.theme.themes.light.colors.primary }">
+    <div class="cuadro4" :style="{ background: $vuetify.theme.themes.light.colors.secondary }">
 
     </div>
-    <v-row class="content-area-books">
+    <v-row class="content-area-books" v-motion-slide-visible-bottom>
       <v-col cols="6" class="text-area-books">
-        <h1 class="title-area-books" v-motion-slide-visible-bottom>
-          Libreria Virtual
+        <h1 class="title-area-books">
+          Libreria  <span class="span-text">Virtual</span>
         </h1>
         <br>
-        <p class="description-area-books" v-motion-slide-visible-bottom>
-          Explora un catálogo que te ayuda a enriquecer tu aprendizaje, <br>
-          encontrar lecturas recomendadas, organizar tus estudios y <br>
-          acceder a recursos educativos de calidad en línea. <br> <br>
+        <p class="description-area-books">
+          Explora y encuentra lecturas recomendadas,
+           organiza tus estudios y <dr>
+
+           </dr>accede a recursos educativos de calidad en línea. <br> <br>
           <span>
 
             ¡Encuentra el libro que necesitas para impulsar tu formación y alcanzar tus metas!
           </span>
         </p>
 
-        <v-btn :to="'/listaLibros'" class="text-none text-white mt-7 mx-12" color="black" min-width="92" rounded v-motion-slide-visible-left>
+        <v-btn :to="'/listaLibros'" class="text-none text-white mt-7 btn-area-book" color="#0f2133" min-width="92" rounded >
           Explorar
         </v-btn>
       
@@ -79,13 +80,14 @@ export default {
 
 .cuadro4 {
   position: absolute;
-  width: 100%;
-  height: 360px;
-  border-radius: 0 0 0 150px;
+  width: 80%;
+  right: 0;
+  height: 450px;
+  border-radius: 150px 0 0 150px;
 }
 
 .card-books {
-  margin-top: 230px;
+  margin-top: 330px;
   margin-right: 5%;
 }
 
@@ -104,16 +106,20 @@ export default {
 
 
 .title-area-books{
-  font-size: clamp(1.4rem, 4vw, 2.7rem);
+  color: #0f2133;
+  margin-top: 40px;
+  font-size: clamp(1.2rem, 3vw, 3rem);
   font-weight: 800;
-  margin-left: 50px;
-  
 }
 .description-area-books {
-  font-size: clamp(0.7rem, 2vw, 1rem);
-  font-weight: 300;
-  color: #383838;
-  margin-left: 50px;
+    font-size: clamp(0.4rem, 3vw, 1rem);
+  color: #6f6f6f !important;
+}
+
+.btn-area-book,
+.description-area-books,
+.title-area-books{
+  margin-left: 55%;
 }
 
 .content-area-books{
@@ -121,26 +127,19 @@ export default {
 }
 
 @media (max-width: 960px) {
-  .title-area-books{
-    margin-left: 40px;
-  }
-  .description-area-books {
-    
-    margin-left: 40px;
-  }
+
   .card-books {
     margin-top: 34%;
   }
 }
-@media (max-width: 600px) {
- 
+@media (max-width: 768px) {
 
-  .title-area-books{
-    margin-left: 30px;
-  }
-  .description-area-books{
-    
-    margin-left: 30px;
+  .cuadro4 {
+    position: absolute;
+    width: 90%;
+    right: 0;
+    height: 450px;
+    border-radius: 150px 0 0 150px;
   }
 
   .content-area-books {
@@ -148,18 +147,37 @@ export default {
   }
 
   .text-area-books{
-    margin-top: 80px;
-    min-width: 350px;
+    min-width: 500px;
   }
   .card-books {
-    margin-left: 90px;
-    margin-top: 0;
-    max-width: 75%;
+      margin-left: 20%;
+      margin-top: 25px;
+      max-width: 75%;
   }
+
+  .btn-area-book,
+  .description-area-books,
+  .title-area-books{
+    margin-left: 25%;
+  }
+
 
   .pt-6 .text-h6{
     font-size: 0.8rem !important;
   }
   
 }
+
+@media (max-width: 468px) {
+  .text-area-books{
+    min-width: 300px;
+  }
+  
+  .btn-area-book,
+  .description-area-books,
+  .title-area-books{
+    margin-left: 35%;
+  }
+}
+
 </style>

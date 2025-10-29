@@ -3,6 +3,7 @@
     <template v-if="capitulo">
       <EditorJs
         v-if="capJson"
+        :key="`viewer-capitulo-${capitulo.ID_Capitulo}`"
         :holder="`viewer-capitulo-${capitulo.ID_Capitulo}`"
         :modelValue="capJson"
         :readOnly="true"
@@ -18,12 +19,12 @@
       >
         <EditorJs
           v-if="secJson(seccion)"
+          :key="`viewer-seccion-${seccion.ID_Seccion}`"
           :holder="`viewer-seccion-${seccion.ID_Seccion}`"
           :modelValue="secJson(seccion)"
           :readOnly="true"
           :autofocus="false"
         />
-        
       </div>
 
       <ChapterPagination

@@ -1,26 +1,51 @@
 <template>
   <div>
-    <v-row>
-      <v-col cols="6" class="CG  texto" v-motion-slide-right >
-        <p class="text-black title-init" >
-          Bienvenido a tu portal
-        </p>
-
-        <h1 class="text-black title-init" >
-          <span>educativo</span> TECNM
+    
+  </div>
+    <v-row style="margin-bottom: 140px;">
+      <v-col cols="7" class="fondo40  texto" v-motion-slide-right >
+        <h1 class="title-init" >
+          <span class="span-text">Comparte</span>
+          <br> Conocimiento
+          Crea <span class="span-text">Contenido</span>
         </h1>
+
+        
         <br>
-        <p class="text-grey descrip-init" style="max-width: 900px;">
-          Encuentra recursos actualizados, recomendaciones de lecturas herramientas para organizar tus estudios.
-          Nuestro catálogo de libros educativos y blocs escolares está diseñado
-          para acompañar tu proceso de enseñanza y aprendizaje, brindando calidad y variedad.
+        <p class="descrip-init">
+          Encuentra recursos creados por docentes y estudiantes.
+          
+          <br>No solo consume: comparte guías, resúmenes y experiencias, forma parte de esta comunidad.
         </p>
-        <v-btn :to="'/'" class="text-none text-white mx-11 mt-15" color="black" min-width="92" rounded v-motion-slide-visible-left>
+        <button>
+
+        </button>
+        <v-btn :to="'/'" class="text-none text-white mx-11 mt-10 btn-init" color="#0f2133" min-width="92" rounded v-motion-slide-visible-left>
           Explorar
         </v-btn>
-      </v-col>
 
-      <v-col  cols="6"
+        
+      <div style="position: absolute;">
+
+          <svg class="cuadro2" width="200" height="200" viewBox="0 0 200 200">
+    <path d="M0,0 Q0,200 200,200 L0,200 Z" fill="white"/>
+  </svg>
+      
+      </div>
+      </v-col>
+            <div style="    
+    left: 105%;
+    top: 30px;">
+            <v-img src="/tecnm.png" class="logo-tecnm"
+            contain style="
+                width: 20%;
+                height: 20%;
+                left: 0%;
+                top: 12%;
+                z-index: 100;
+                " />
+      </div>
+      <v-col  cols="5"
         class="CG">
          <v-row>
             <v-col cols="10">
@@ -44,30 +69,10 @@
                 </Book3D>
               </div>
 
-              <div class="cuadro90">
-
-
-              </div>
               </v-col>
           </v-row>
       </v-col>
     </v-row>
-      <div class="cuadro1" :style="{ background: $vuetify.theme.themes.light.colors.secondary }">
-            <v-img src="/tecnm.png" class="logo-tecnm"
-            contain style="
-                width: 20%;
-                height: 20%;
-                left: 90%;
-                top: 12%;
-                z-index: 100;
-                " />
-      </div>
-      <div style="position: relative;">
-        <div class="cuadro2"  :style="{ background: $vuetify.theme.themes.light.colors.secondary }"></div>
-        <div class="cuadro3" :style="{ background: $vuetify.theme.themes.light.colors.primary }"></div>
-      
-      </div>
-    </div>
 </template>
 
 <script setup>
@@ -110,6 +115,14 @@ const bookSize = computed(() => {
   margin-left: 50px;
 }
 
+.fondo40{
+  padding-top: 50px;
+  top: 0px;
+  width: 58%;
+  height: 15.1%;
+  border-radius: 0 0 150px 0;
+  background: white;
+}
 .texto {
   z-index: 100;
 }
@@ -124,31 +137,15 @@ const bookSize = computed(() => {
 }
 
 .cuadro2 {
-  width: 175px;
-  height: 120px;
+  transform: rotate(90deg);
+  margin-top: 5px;
+ 
 }
 
 .cuadro1 {
-  position: absolute;
-  top: 0px;
-  width: 58%;
-  height: 470px;
-  border-radius: 0 0 150px 0;
+
 }
 
-.cuadro90 {
-  position: absolute;
-  right: 0;
-  top: 300px;
-  background: rgb(239 242 241);
-  width: 30%;
-  height: 260px;
-  border-radius: 40px;
-  opacity: 0.8;
-  background-image: radial-gradient(#0a0e5a 0.5px, transparent 0.5px), radial-gradient(#0f1245 0.5px, #e5e5f700 0.5px);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
-}
 
 .book-3d-wrapper {
   rotate: 5grad;
@@ -161,15 +158,25 @@ const bookSize = computed(() => {
 }
 
 .title-init {
-  font-size: clamp(1.4rem, 4vw, 2.7rem);
-  font-weight: 800;
-  
-  margin-left: 50px;
+  color: #0f2133;
+  font-size: clamp(1.2rem, 4.5vw, 4.7rem);
+  line-height: 1.2;
+  margin-left: 45px;
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
 }
 .descrip-init {
+  padding-right: 130px;
+  max-width: 800px;
   font-size: clamp(0.7rem, 2vw, 1rem);
-  
   margin-left: 50px;
+  line-height: 1.8;
+  color: #6f6f6f !important;
+}
+.span-text{
+  color: #241f93  !important;
 }
 
 @media (max-width: 960px) {
@@ -192,42 +199,46 @@ const bookSize = computed(() => {
     top: 40% !important;
   }
 
-  .title-init {
-  margin-left: 40px;
-}
-.descrip-init {
-  margin-left: 40px;
-}
+  .title-init,
+  .descrip-init {
+    margin-left: 40px;
+  }
+
 
 }
 
-@media (max-width: 600px) {
-  
+
+@media (max-width: 555px) {
+
+   
   .logo-tecnm {
     width: 30% !important;
     left: 85% !important;
     top: 30% !important;
   } 
 
-  .cuadro90 {
-    display: none;
+  .cuadro2{
+    width: 70%;
+    margin-top: -30px;
   }
-  
-  .cuadro1{
-    width: 75%;
-  }
-
   .book-3d-wrapper {
-    left: -35% !important;
-    top: 65% !important;
+    left: -15% !important;
+    top: 40% !important;
   }
 
-  .title-init {
+  .title-init, .descrip-init {
     margin-left: 30px;
   }
   .descrip-init {
-    margin-left: 30px;
+    padding: 0;
+  }
+
+  .btn-init{
+    margin-top: 30px !important;
+    margin-left: 30px !important;
+    z-index: 100;
   }
 
 }
+
 </style>
