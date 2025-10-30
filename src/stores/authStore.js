@@ -67,21 +67,23 @@ export const useAuthStore = defineStore('auth', {
     },
     async checkAuth() {
       try {
-        const response = await axios.get(`${VITE_APP_URL_BACKEND}/auth/check-auth`, { withCredentials: true });
+        const token = this.token || localStorage.getItem('token');
+        if (!token) throw new Error('No autenticado');
+
+        const response = await axios.get(`${VITE_APP_URL_BACKEND}/auth/check-auth`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
         this.user = response.data.user;
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        this.token = response.data.token || localStorage.getItem('token') || Cookies.get('token');
-        localStorage.setItem('token', this.token);
-        Cookies.set('token', this.token);
-        return { status: response.data.status , message: response.data.message };
+        localStorage.setItem('user', JSON.stringify(this.user));
+        return { status: response.data.status, message: response.data.message };
       } catch (error) {
         this.user = null;
         this.token = null;
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        Cookies.remove('token');
-        return { status: "error", message: error.response?.data?.message || 'No autenticado o sin permisos' };
+        return { status: 'error', message: error.response?.data?.message || 'No autenticado' };
       }
-    } 
+    }
   }
 });
