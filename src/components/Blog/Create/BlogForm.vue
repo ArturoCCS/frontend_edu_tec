@@ -112,7 +112,7 @@
             </div>
           </div>
 
-          <div class="group-block">
+          <!-- <div class="group-block">
             <div class="group-label">Tags libres (palabras clave)</div>
             <TagInput
               v-model="blog.freeTags"
@@ -121,7 +121,7 @@
               placeholder="Escribe y Enter/Tab…"
             />
             <div class="muted tiny">Máximo 8. Se normalizan a minúsculas y sin acentos.</div>
-          </div>
+          </div> -->
         </form>
       
       </section>
@@ -312,7 +312,6 @@ import EditorJs from './EditorJs.vue';
 
 import { useBlogEditorStore } from '@/stores/blogEditorStore';
 import { useCatalogsStore } from '@/stores/catalogsStore';
-import TagInput from './inputs/TagInput.vue';
 import SuggestTaxonModal from './modals/SuggestTaxonModal.vue';
 
 const editorStore = useBlogEditorStore()
