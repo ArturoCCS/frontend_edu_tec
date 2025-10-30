@@ -9,7 +9,7 @@ export const useUserStore = defineStore('user', {
   actions: {
     async requestPasswordReset(credentials) {
       try {
-        const response = await axios.post('http://localhost:3000/user/password-reset', credentials);
+        const response = await axios.post(`${VITE_APP_URL_BACKEND}/user/password-reset`, credentials);
         return { status: response.data.status, message: response.data.message };
       } catch (error) {
         return { status: 'error', message: error.response?.data?.message || 'Error en la recuperación de contraseña' };
@@ -17,7 +17,7 @@ export const useUserStore = defineStore('user', {
     },
     async resetPassword(recoveryToken, newPassword) {
       try {
-        const response = await axios.post(`http://localhost:3000/user/reset-password/${recoveryToken}`, { password: newPassword });
+        const response = await axios.post(`${VITE_APP_URL_BACKEND}/user/reset-password/${recoveryToken}`, { password: newPassword });
         return { status: response.data.status , message: response.message };
       } catch (error) {
         return { 
@@ -28,7 +28,7 @@ export const useUserStore = defineStore('user', {
     },
   async checkPermission(){
       try{
-        const response = await axios.get('http://localhost:3000/plataform/protected-route', { 
+        const response = await axios.get(`${VITE_APP_URL_BACKEND}/plataform/protected-route`, { 
           withCredentials: true 
         });
         this.permissions = response.data.permissions; 

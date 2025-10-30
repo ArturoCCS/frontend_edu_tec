@@ -67,7 +67,7 @@ const secJson = (seccion) => parseEditorData(seccion?.ContenidoJson ?? seccion?.
 onMounted(async () => {
   if (props.blog?.id_usuario) {
     try {
-      const res = await axios.get(`http://localhost:3000/user/${props.blog.id_usuario}`)
+      const res = await axios.get(`${VITE_APP_URL_BACKEND}/user/${props.blog.id_usuario}`)
       autorNombre.value = res.data.name || res.data.nombre || 'Autor desconocido'
     } catch {
       autorNombre.value = 'Autor desconocido'

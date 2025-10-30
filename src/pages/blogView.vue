@@ -14,12 +14,12 @@
     <aside class="page-sidebar">
       <PageSidebar :secciones="capituloSeleccionado?.secciones || []" />
     </aside>
-
+<!-- 
     <ChatbotWidget
       :blog="blog"
       :capitulos="capitulos"
       :capitulo="capituloSeleccionado"
-    />
+    /> -->
   </div>
 </template>
 
@@ -29,7 +29,6 @@ import PageSidebar from '@/components/Blog/View/PageSidebar.vue'
 import SidebarNav from '@/components/Blog/View/SidebarNav.vue'
 import ThemeSwitcher from '@/components/Blog/View/ThemeSwitcher.vue'
 
-import ChatbotWidget from '@/components/Chat/ChatbotWidget.vue'
 
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
@@ -39,17 +38,18 @@ const route = useRoute()
 const blog = ref(null)
 const capitulos = ref([])
 const capituloSeleccionado = ref(null)
+const VITE_APP_URL_BACKEND = import.meta.env.VITE_APP_URL_BACKEND || 'http://localhost:3000';
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get(`http://localhost:3000/plataform/${route.params.id}`)
+    const { data } = await axios.get(`/plataform/${route.params.id}`)
     blog.value = data
 
-    const { data: capitulosData } = await axios.get(`http://localhost:3000/plataform/${route.params.id}/capitulos`)
+    const { data: capitulosData } = await axios.get(`${VITE_APP_URL_BACKEND}/plataform/${route.params.id}/capitulos`)
     capitulos.value = capitulosData
 
     for (const capitulo of capitulos.value) {
-      const { data: seccionesData } = await axios.get(`http://localhost:3000/plataform/capitulos/${capitulo.ID_Capitulo}/secciones`)
+      const { data: seccionesData } = await axios.get(`${VITE_APP_URL_BACKEND}/plataform/capitulos/${capitulo.ID_Capitulo}/secciones`)
       capitulo.secciones = seccionesData
     }
 

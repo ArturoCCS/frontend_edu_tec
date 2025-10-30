@@ -1,3 +1,5 @@
+const VITE_APP_URL_BACKEND = import.meta.env.VITE_APP_URL_BACKEND || 'http://localhost:3000';
+
 export async function chat(payload: {
   messages: { role: 'system'|'user'|'assistant', content: string }[]
   context: {
@@ -8,7 +10,7 @@ export async function chat(payload: {
   language?: 'es'|'en'
   responseFormat?: 'quiz-json' | 'survey-json' | 'flashcards-json'
 }) {
-  const res = await fetch('http://localhost:3000/ai/chat', {
+  const res = await fetch(`${VITE_APP_URL_BACKEND}/ai/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)

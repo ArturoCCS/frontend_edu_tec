@@ -2,6 +2,7 @@ import { useUserStore } from '@/stores/userStore.js';
 import axios from 'axios';
 import Cookies from "js-cookie";
 import { defineStore } from 'pinia';
+const VITE_APP_URL_BACKEND = import.meta.env.VITE_APP_URL_BACKEND || 'http://localhost:3000';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -11,7 +12,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async register(credentials) {
       try {
-        const response = await axios.post('http://localhost:3000/auth/register', credentials);
+        const response = await axios.post(`${VITE_APP_URL_BACKEND}/auth/register`, credentials);
         return { status: response.data.status, message: response.data.message };
       } catch (error) {
         return { status: "error", message: error.response?.data?.message || 'Error en la autenticación' };
@@ -19,7 +20,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async login(credentials) {
       try {
-        const response = await axios.post('http://localhost:3000/auth/login', credentials, { withCredentials: true });
+        const response = await axios.post(`${VITE_APP_URL_BACKEND}/auth/login`, credentials, { withCredentials: true });
         this.token = response.data.token;
         localStorage.setItem('token', response.data.token);
         Cookies.set('token', response.data.token);
@@ -34,7 +35,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async logout() {
       try {
-        await axios.post('http://localhost:3000/auth/logout', {}, { withCredentials: true });
+        await axios.post(`${VITE_APP_URL_BACKEND}/auth/logout`, {}, { withCredentials: true });
       } catch (e) {
       }
       const userStore = useUserStore();
@@ -51,14 +52,14 @@ export const useAuthStore = defineStore('auth', {
       this.user = user ? JSON.parse(user) : null;
     },
     withGoogle() {
-      window.location.href = 'http://localhost:3000/auth/google';
+      window.location.href = `${VITE_APP_URL_BACKEND}/auth/google`
     },
     withMicrosoft() {
-      window.location.href = 'http://localhost:3000/auth/microsoft';
+      window.location.href = `${VITE_APP_URL_BACKEND}/auth/microsoft`
     },
     async confirmEmail(token) {
       try {
-        const response = await axios.get(`http://localhost:3000/auth/confirm/${token}`);
+        const response = await axios.get(`${VITE_APP_URL_BACKEND}/auth/confirm/${token}`);
         return { status: response.data.status, message: response.data.message };
       } catch (error) {
         return { status: 'error', message: error.response?.data?.message || 'Error al confirmar el correo' };
@@ -66,7 +67,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async checkAuth() {
       try {
-        const response = await axios.get('http://localhost:3000/auth/check-auth', { withCredentials: true });
+        const response = await axios.get(`${VITE_APP_URL_BACKEND}/auth/check-auth`, { withCredentials: true });
         this.user = response.data.user;
         localStorage.setItem('user', JSON.stringify(response.data.user));
         this.token = response.data.token || localStorage.getItem('token') || Cookies.get('token');
