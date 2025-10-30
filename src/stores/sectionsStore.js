@@ -1,5 +1,6 @@
 import { api } from '@/lib/api';
 import { defineStore } from 'pinia';
+const VITE_APP_URL_BACKEND = import.meta.env.VITE_APP_URL_BACKEND
 
 export const useSectionsStore = defineStore('sections', {
   state: () => ({ sections: [], q: '', loading: false, error: null }),
@@ -8,7 +9,7 @@ export const useSectionsStore = defineStore('sections', {
       this.loading = true; this.error = null
       try {
         const q = params.q ?? this.q ?? ''
-        const { data } = await api.get('/api/blogs/sections', { params: { q } })
+        const { data } = await api.get(`${VITE_APP_URL_BACKEND}/api/blogs/sections`, { params: { q } })
         this.sections = Array.isArray(data) ? data.map(sec => ({
           key: sec.key,
           title: sec.title,

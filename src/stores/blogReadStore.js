@@ -1,5 +1,6 @@
 import { api } from '@/lib/api'
 import { defineStore } from 'pinia'
+const VITE_APP_URL_BACKEND = import.meta.env.VITE_APP_URL_BACKEND
 
 function parseEdjs(data) {
   if (!data) return null
@@ -61,12 +62,12 @@ export const useBlogReadStore = defineStore('blogRead', {
       this.error = null
 
       try {
-        const meta = await api.get(`/api/blogs/${blogId}`)
+        const meta = await api.get(`${VITE_APP_URL_BACKEND}/api/blogs/${blogId}`)
         this.metaByBlog.set(String(blogId), meta.data || {})
       } catch {}
 
       try {
-        const { data } = await api.get(`/api/blogs/${blogId}/nodes`)
+        const { data } = await api.get(`${VITE_APP_URL_BACKEND}/api/blogs/${blogId}/nodes`)
         const raw = Array.isArray(data) ? data : []
         const mapped = raw.map(n => {
           const id_node = n.id_node ?? n.ID_Seccion ?? n.ID_Capitulo ?? n.id

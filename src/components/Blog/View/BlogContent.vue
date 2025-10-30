@@ -61,8 +61,8 @@ function parseEditorData(raw) {
   return null
 }
 
-const capJson = computed(() => parseEditorData(props.capitulo?.ContenidoJson ?? props.capitulo?.Contenido))
-const secJson = (seccion) => parseEditorData(seccion?.ContenidoJson ?? seccion?.Contenido)
+const capJson = computed(() => props.capitulo?.content ?? parseEditorData(props.capitulo?.ContenidoJson ?? props.capitulo?.Contenido))
+const secJson = (seccion) => seccion?.content ?? parseEditorData(seccion?.ContenidoJson ?? seccion?.Contenido)
 
 onMounted(async () => {
   if (props.blog?.id_usuario) {
@@ -75,6 +75,9 @@ onMounted(async () => {
   }
 })
 
+console.log('capitulo:', props.capitulo)
+console.log('capitulos:', props.capitulos)
+console.log('blog:', props.blog)
 const emit = defineEmits(['navigate'])
 function onNavigate(id) {
   emit('navigate', id)

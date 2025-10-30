@@ -42,10 +42,11 @@ const VITE_APP_URL_BACKEND = import.meta.env.VITE_APP_URL_BACKEND || 'http://loc
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get(`/plataform/${route.params.id}`)
+    const blogId = route.params.id; 
+    const { data } = await axios.get(`${VITE_APP_URL_BACKEND}/plataform/${blogId}`)
     blog.value = data
 
-    const { data: capitulosData } = await axios.get(`${VITE_APP_URL_BACKEND}/plataform/${route.params.id}/capitulos`)
+    const { data: capitulosData } = await axios.get(`${VITE_APP_URL_BACKEND}/plataform/${blogId}/capitulos`)
     capitulos.value = capitulosData
 
     for (const capitulo of capitulos.value) {
@@ -60,6 +61,7 @@ onMounted(async () => {
     }
   } catch (err) {
     console.error('Error al cargar el blog:', err)
+    blog.value = null; 
   }
 })
 
@@ -69,6 +71,6 @@ function handleNavigate(id) {
 }
 
 const seleccionarCapitulo = (capitulo) => {
-  capituloSeleccionado.value = capitulo
+ capituloSeleccionado.value = capitulo
 }
 </script>

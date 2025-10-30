@@ -56,7 +56,7 @@
               :template="templateFor(item)"
               :title="item.Titulo || item.title"
               :description="item.Descripcion || item.description"
-              :author="'Autor'"
+              :author="item.Autor"
               :date="formatDate(item.Fecha_Creacion || item.createdAt)"
               :colors="colorFor(item.Titulo || item.title || item.ID_Blog || item.id || index)"
               :to="blogBaseUrl + (item.ID_Blog || item.id)"
@@ -79,6 +79,7 @@ import TemplateSelector from './ListBlogs/FolderRenderer.vue'
 import RowSlider from './ListBlogs/RowSlider.vue'
 
 const blogBaseUrl = import.meta.env.VITE_BLOG_URL || '/blogs/'
+const VITE_APP_URL_BACKEND = import.meta.env.VITE_APP_URL_BACKEND
 const sectionsStore = useSectionsStore()
 const soundStore = useSoundStore()
 
@@ -117,9 +118,31 @@ function revealDelay(secKey, index) {
 
 const TEMPLATES = ['classic', 'glass']
 function hashStr(s) { s = String(s || ''); let h = 0; for (let i = 0; i < s.length; i++) { h = (h << 5) - h + s.charCodeAt(i); h |= 0 } return Math.abs(h) }
-function pickTemplateFor(item) { const key = item?.ID_Blog || item?.id || item?.Titulo || item?.title || JSON.stringify(item); return TEMPLATES[hashStr(key) % TEMPLATES.length] }
+function pickTemplateFor(item) { const key = item?.ID_Blog || item?.id || item?.Titulo || item?.title ||  item?.id_usuario || JSON.stringify(item); return TEMPLATES[hashStr(key) % TEMPLATES.length] }
 function templateFor(item) { return pickTemplateFor(item) }
 function formatDate(d) { if (!d) return ''; const date = new Date(String(d).replace(' ', 'T')); return date.toLocaleString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) }
+
+
+async function fetchAuthorName(id_usuario) {
+  const res = await fetch(`${VITE_APP_URL_BACKEND}/user/${id_usuario}`);
+  if (!res.ok) return "Autor desconocido";
+  const data = await res.json();
+  return data.nombre || "Autor desconocido";
+}
+
+async function enrichAuthors() {
+  for (const sec of sectionsStore.sections || []) {
+    if (sec.items) {
+      await Promise.all(
+        sec.items.map(async (item) => {
+          if (!item.Autor && item.id_usuario) {
+            item.Autor = await fetchAuthorName(item.id_usuario)
+          }
+        })
+      )
+    }
+  }
+}
 
 let t = 0
 watch(q, (val) => {
@@ -129,15 +152,22 @@ watch(q, (val) => {
     sectionsStore.fetchSections({ q: val })
   }, 250)
 })
-
-onMounted(() => {
-  sectionsStore.fetchSections()
+onMounted(async () => {
+  await sectionsStore.fetchSections()
+  await enrichAuthors()
   soundStore.ensureAudio()
   soundStore.loadSounds()
   soundStore.resumeOnFirstInteraction()
 })
 
-watch(() => sectionsStore.sections, () => buildPlans(), { deep: true, immediate: true })
+watch(
+  () => sectionsStore.sections,
+  async () => {
+    buildPlans()
+    await enrichAuthors()
+  },
+  { deep: true, immediate: true }
+)
 </script>
 
 <style scoped>
