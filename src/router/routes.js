@@ -56,6 +56,11 @@ const routes = [
   component: BlogList
  },
  {
+  path: '/simulador/',
+  name:'Simulador',
+  component: () => import('../pages/simulador.vue'),
+ },
+ {
   path: '/about',
   component: BlogForm,
  }

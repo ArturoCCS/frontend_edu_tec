@@ -23,5 +23,6 @@ declare module 'vue-router/auto-routes' {
     '/confirmationRequired': RouteRecordInfo<'/confirmationRequired', '/confirmationRequired', Record<never, never>, Record<never, never>>,
     '/librosView': RouteRecordInfo<'/librosView', '/librosView', Record<never, never>, Record<never, never>>,
     '/protected_route': RouteRecordInfo<'/protected_route', '/protected_route', Record<never, never>, Record<never, never>>,
+    '/simulador': RouteRecordInfo<'/simulador', '/simulador', Record<never, never>, Record<never, never>>,
   }
 }
