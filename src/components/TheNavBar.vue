@@ -144,6 +144,7 @@ const navItems = ref([
   },
   { icon: "fa-solid fa-book", notifications: 0, name: "Libro", path: "/listaLibros", requiresAuth: true },
   { icon: "fa-solid fa-hexagon-nodes-bolt", notifications: 0, name: "Simulador", path: "/simulador", requiresAuth: false },
+  { icon: "fa-solid fa-clipboard-question", notifications: 0, name: "Cuestionario", path: "/cuestionario", requiresAuth: false },
   { icon: "fa-solid fa-sign-out-alt", notifications: 0, name: "Cerrar sesión", path: "/", requiresAuth: true, logout: true },
 ]);
 

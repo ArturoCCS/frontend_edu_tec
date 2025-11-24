@@ -24,7 +24,6 @@ declare module 'vue' {
     Flashcards: typeof import('./src/components/Utils/Flashcards.vue')['default']
     FolderRenderer: typeof import('./src/components/Blog/View/ListBlogs/FolderRenderer.vue')['default']
     ForgotPassword: typeof import('./src/components/Auth/ForgotPassword.vue')['default']
-    FormSim: typeof import('./src/components/Sim/DataUserForm.vue')['default']
     GlassCard: typeof import('./src/components/Blog/View/ListBlogs/FolderTemplates/GlassCard.vue')['default']
     LoginForm: typeof import('./src/components/Auth/LoginForm.vue')['default']
     NeonCard: typeof import('./src/components/Blog/View/ListBlogs/FolderTemplates/NeonCard.vue')['default']

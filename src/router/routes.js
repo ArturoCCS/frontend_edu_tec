@@ -39,31 +39,36 @@ const routes = [
   },
   { path: '/forgot-password', component: ForgotPassword },
   {
-  path: '/blog/:id',
-  name: 'Blog',
-  component: () => import('../pages/blogView.vue'),
-  meta: { requiresAuth: true }
- } ,
-   {
-  path: '/listaLibros',
-  name: 'Libro',
-  component: () => import('../pages/librosView.vue'),
-  meta: { requiresAuth: true }
- } ,
- {
-  path: '/listaBlogs/',
-  name:'ListadoBlog',
-  component: BlogList
- },
- {
-  path: '/simulador/',
-  name:'Simulador',
-  component: () => import('../pages/simulador.vue'),
- },
- {
-  path: '/about',
-  component: BlogForm,
- }
+    path: '/blog/:id',
+    name: 'Blog',
+    component: () => import('../pages/blogView.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/listaLibros',
+    name: 'Libro',
+    component: () => import('../pages/librosView.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/listaBlogs/',
+    name:'ListadoBlog',
+    component: BlogList
+  },
+  {
+    path: '/simulador/',
+    name:'Simulador',
+    component: () => import('../pages/simulador.vue'),
+  },
+  {
+    path: '/cuestionario/',
+    name:'Cuestionario',
+    component: () => import('../pages/cuestionario.vue'),
+  },
+  {
+    path: '/about',
+    component: BlogForm,
+  }
 ]
 
 export default routes;
