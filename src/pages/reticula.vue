@@ -10,17 +10,18 @@
           </v-card-title>
           
           <v-card-text>
-            <!-- Resumen de avance -->
+            <!-- Avance General -->
             <div class="mb-4">
               <div class="text-h6 mb-2">Avance General</div>
               <v-progress-linear
                 :model-value="porcentajeAvance"
                 color="primary"
-                height="25"
+                height="30"
                 rounded
+                class="elevation-2"
               >
                 <template v-slot:default>
-                  <strong>{{ porcentajeAvance.toFixed(1) }}%</strong>
+                  <strong class="text-white">{{ porcentajeAvance.toFixed(1) }}%</strong>
                 </template>
               </v-progress-linear>
             </div>
@@ -28,28 +29,31 @@
             <!-- Créditos -->
             <v-row class="mb-4">
               <v-col cols="6">
-                <v-card color="success" dark>
-                  <v-card-text class="text-center">
-                    <div class="text-h4">{{ creditosObtenidos }}</div>
-                    <div class="text-caption">Créditos</div>
+                <v-card color="success" dark elevation="4">
+                  <v-card-text class="text-center py-4">
+                    <v-icon size="40" class="mb-2">mdi-star</v-icon>
+                    <div class="text-h3">{{ creditosObtenidos }}</div>
+                    <div class="text-caption">Créditos Obtenidos</div>
                   </v-card-text>
                 </v-card>
               </v-col>
               <v-col cols="6">
-                <v-card color="info" dark>
-                  <v-card-text class="text-center">
-                    <div class="text-h4">{{ totalCreditos }}</div>
-                    <div class="text-caption">Total</div>
+                <v-card color="info" dark elevation="4">
+                  <v-card-text class="text-center py-4">
+                    <v-icon size="40" class="mb-2">mdi-trophy</v-icon>
+                    <div class="text-h3">{{ totalCreditos }}</div>
+                    <div class="text-caption">Total Requeridos</div>
                   </v-card-text>
                 </v-card>
               </v-col>
             </v-row>
 
             <!-- Promedio -->
-            <v-card class="mb-4" color="primary" dark>
-              <v-card-text class="text-center">
-                <div class="text-h3">{{ promedioGeneral }}</div>
-                <div class="text-subtitle-1">Promedio General</div>
+            <v-card class="mb-4" elevation="6">
+              <v-card-text class="text-center py-6" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <v-icon size="50" class="mb-2" color="white">mdi-chart-line</v-icon>
+                <div class="text-h2 font-weight-bold text-white">{{ promedioGeneral }}</div>
+                <div class="text-h6 text-white">Promedio General</div>
               </v-card-text>
             </v-card>
 
@@ -218,7 +222,8 @@
             <!-- Vista de cuadrícula -->
             <div v-if="vistaActual === 'grid'" class="reticula-grid">
               <div v-for="sem in 9" :key="sem" class="semestre-column">
-                <div class="semestre-header">
+                <div class="semestre-header" :style="{ background: getSemestreColor(sem) }">
+                  <v-icon class="mr-2" color="white">mdi-school</v-icon>
                   Semestre {{ sem }}
                 </div>
                 <div class="materias-container">
@@ -230,8 +235,11 @@
                   >
                     <div class="materia-codigo">{{ materia.id }}</div>
                     <div class="materia-nombre">{{ materia.nombre }}</div>
-                    <div class="materia-creditos">{{ materia.creditos }} créditos</div>
-                    <v-icon v-if="materiasCursadas[materia.id]" class="materia-check">
+                    <div class="materia-creditos">
+                      <v-icon size="12">mdi-star</v-icon>
+                      {{ materia.creditos }} créditos
+                    </div>
+                    <v-icon v-if="materiasCursadas[materia.id] || yaAprobadaEnHistorial(materia.id)" class="materia-check">
                       mdi-check-circle
                     </v-icon>
                   </div>
@@ -335,7 +343,17 @@
 
           <!-- Estado actual -->
           <v-alert
-            v-if="materiasCursadas[materiaSeleccionada.id]?.calificacion >= 70"
+            v-if="yaAprobadaEnHistorial(materiaSeleccionada.id)"
+            type="success"
+            density="compact"
+            class="mb-4"
+          >
+            <v-icon class="mr-2">mdi-lock-check</v-icon>
+            Materia YA APROBADA en un semestre anterior
+            <div class="text-caption mt-1">No puedes volver a cursarla</div>
+          </v-alert>
+          <v-alert
+            v-else-if="materiasCursadas[materiaSeleccionada.id]?.calificacion >= 70"
             type="success"
             density="compact"
             class="mb-4"
@@ -349,7 +367,7 @@
             class="mb-4"
           >
             Materia REPROBADA - Calificación: {{ materiasCursadas[materiaSeleccionada.id].calificacion }}
-            <div class="text-caption mt-1">Necesitas mínimo 70 para aprobar y desbloquear las siguientes materias</div>
+            <div class="text-caption mt-1">Puedes modificar la calificación si recursas la materia</div>
           </v-alert>
           <v-alert
             v-else-if="puedeSerCursada(materiaSeleccionada.id)"
@@ -366,15 +384,15 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            v-if="materiasCursadas[materiaSeleccionada.id]"
+            v-if="materiasCursadas[materiaSeleccionada.id] && !yaAprobadaEnHistorial(materiaSeleccionada.id)"
             color="error"
             variant="outlined"
             @click="eliminarMateria(materiaSeleccionada.id)"
           >
-            Eliminar
+            {{ materiasCursadas[materiaSeleccionada.id].calificacion < 70 ? 'Modificar Calificación' : 'Eliminar' }}
           </v-btn>
           <v-btn
-            v-else-if="puedeSerCursada(materiaSeleccionada.id)"
+            v-else-if="puedeSerCursada(materiaSeleccionada.id) && !yaAprobadaEnHistorial(materiaSeleccionada.id)"
             color="success"
             variant="elevated"
             @click="abrirAgregarCalificacion(materiaSeleccionada)"
@@ -401,11 +419,13 @@
             label="Selecciona una materia"
             :hint="`${materiasDisponibles.length} materias disponibles para cursar`"
             persistent-hint
+            variant="outlined"
+            color="primary"
           >
             <template v-slot:item="{ props, item }">
               <v-list-item v-bind="props">
                 <template v-slot:prepend>
-                  <v-chip size="small" :color="item.raw.color" class="mr-2">
+                  <v-chip size="small" :color="item.raw.color" class="mr-2" style="color: white; font-weight: bold;">
                     {{ item.raw.id }}
                   </v-chip>
                 </template>
@@ -422,6 +442,8 @@
             class="mt-4"
             hint="Calificación mínima para aprobar: 70"
             persistent-hint
+            variant="outlined"
+            color="primary"
           ></v-text-field>
         </v-card-text>
         <v-card-actions>
@@ -453,19 +475,41 @@
           <div class="mb-4">
             <div class="text-h6 mb-2">Resumen del Semestre Actual</div>
             <v-row>
-              <v-col cols="6">
-                <v-card color="primary" dark>
+              <v-col cols="4">
+                <v-card color="primary" dark elevation="4">
                   <v-card-text class="text-center">
-                    <div class="text-h4">{{ materiasAprobadas.length }}</div>
+                    <v-icon size="32" class="mb-2">mdi-book-open-variant</v-icon>
+                    <div class="text-h4">{{ Object.keys(materiasCursadas).length }}</div>
                     <div class="text-caption">Materias Cursadas</div>
                   </v-card-text>
                 </v-card>
               </v-col>
-              <v-col cols="6">
-                <v-card color="success" dark>
+              <v-col cols="4">
+                <v-card color="success" dark elevation="4">
                   <v-card-text class="text-center">
-                    <div class="text-h4">{{ promedioGeneral }}</div>
-                    <div class="text-caption">Promedio</div>
+                    <v-icon size="32" class="mb-2">mdi-check-circle</v-icon>
+                    <div class="text-h4">{{ materiasAprobadas.length }}</div>
+                    <div class="text-caption">Aprobadas</div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="4">
+                <v-card color="error" dark elevation="4">
+                  <v-card-text class="text-center">
+                    <v-icon size="32" class="mb-2">mdi-close-circle</v-icon>
+                    <div class="text-h4">{{ materiasReprobadas.length }}</div>
+                    <div class="text-caption">Reprobadas</div>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+            <v-row class="mt-2">
+              <v-col cols="12">
+                <v-card color="info" dark elevation="4">
+                  <v-card-text class="text-center">
+                    <v-icon size="40" class="mb-2">mdi-trophy</v-icon>
+                    <div class="text-h3">{{ promedioGeneral }}</div>
+                    <div class="text-subtitle-1">Promedio del Semestre</div>
                   </v-card-text>
                 </v-card>
               </v-col>
@@ -613,18 +657,38 @@ const puedeSerCursada = (materiaId) => {
   const materia = materiasData.find(m => m.id === materiaId);
   if (!materia) return false;
   
-  // Si ya está cursada, no puede ser cursada de nuevo
-  if (materiasCursadas.value[materiaId]) return false;
+  // Si ya está aprobada en algún semestre del historial, no puede cursarse de nuevo
+  const yaAprobada = historialSemestres.value.some(sem => 
+    sem.materias.some(m => m.id === materiaId && m.calificacion >= 70)
+  );
+  if (yaAprobada) return false;
+  
+  // Si ya está cursada actualmente y aprobada, no puede ser cursada de nuevo
+  if (materiasCursadas.value[materiaId]?.calificacion >= 70) return false;
   
   // Verificar que todos los requisitos estén cumplidos Y aprobados (calificación >= 70)
   return materia.requisitos.every(req => {
-    const cursada = materiasCursadas.value[req];
-    return cursada && cursada.calificacion >= 70;
+    // Buscar en el semestre actual
+    const cursadaActual = materiasCursadas.value[req];
+    if (cursadaActual && cursadaActual.calificacion >= 70) return true;
+    
+    // Buscar en el historial
+    const aprobadaHistorial = historialSemestres.value.some(sem =>
+      sem.materias.some(m => m.id === req && m.calificacion >= 70)
+    );
+    return aprobadaHistorial;
   });
 };
 
 // Obtener estado visual de la materia
 const getEstadoMateria = (materiaId) => {
+  // Verificar si está aprobada en el historial
+  const aprobadaHistorial = historialSemestres.value.some(sem =>
+    sem.materias.some(m => m.id === materiaId && m.calificacion >= 70)
+  );
+  if (aprobadaHistorial) return 'aprobada';
+  
+  // Verificar en el semestre actual
   const cursada = materiasCursadas.value[materiaId];
   if (cursada && cursada.calificacion >= 70) return 'aprobada';
   if (cursada && cursada.calificacion < 70) return 'reprobada';
@@ -660,9 +724,20 @@ const materiasBloqueadas = computed(() => {
   );
 });
 
-// Créditos obtenidos
+// Créditos obtenidos (acumulados de todos los semestres + actual)
 const creditosObtenidos = computed(() => {
-  return materiasAprobadas.value.reduce((total, m) => total + m.creditos, 0);
+  // Créditos del semestre actual aprobadas
+  const creditosActuales = materiasAprobadas.value.reduce((total, m) => total + m.creditos, 0);
+  
+  // Créditos de semestres anteriores
+  const creditosHistorial = historialSemestres.value.reduce((total, sem) => {
+    const creditosSem = sem.materias
+      .filter(m => m.calificacion >= 70)
+      .reduce((sum, m) => sum + m.creditos, 0);
+    return total + creditosSem;
+  }, 0);
+  
+  return creditosActuales + creditosHistorial;
 });
 
 // Porcentaje de avance
@@ -678,6 +753,29 @@ const promedioGeneral = computed(() => {
   const suma = calificaciones.reduce((total, m) => total + m.calificacion, 0);
   return (suma / calificaciones.length).toFixed(2);
 });
+
+// Obtener color del semestre (paleta minimalista y profesional)
+const getSemestreColor = (semestre) => {
+  const colores = [
+    'linear-gradient(135deg, #2C5AA0 0%, #1E3A5F 100%)', // Azul oscuro académico
+    'linear-gradient(135deg, #0D9488 0%, #0F766E 100%)', // Verde azulado
+    'linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%)', // Púrpura elegante
+    'linear-gradient(135deg, #059669 0%, #047857 100%)', // Verde esmeralda
+    'linear-gradient(135deg, #DC2626 0%, #B91C1C 100%)', // Rojo académico
+    'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)', // Azul eléctrico
+    'linear-gradient(135deg, #9333EA 0%, #7E22CE 100%)', // Morado profundo
+    'linear-gradient(135deg, #0891B2 0%, #0E7490 100%)', // Cyan
+    'linear-gradient(135deg, #475569 0%, #334155 100%)', // Gris pizarra
+  ];
+  return colores[semestre - 1];
+};
+
+// Verificar si una materia ya fue aprobada en el historial
+const yaAprobadaEnHistorial = (materiaId) => {
+  return historialSemestres.value.some(sem =>
+    sem.materias.some(m => m.id === materiaId && m.calificacion >= 70)
+  );
+};
 
 // Abrir detalle de materia
 const abrirDetalleMateria = (materia) => {
@@ -768,102 +866,261 @@ const reiniciarProgreso = () => {
   overflow-y: auto;
 }
 
+.modern-card {
+  border-radius: 16px !important;
+  border: 1px solid #E2E8F0;
+}
+
+/* Stats cards minimalistas */
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  border: 2px solid;
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-primary {
+  border-color: #2C5AA0;
+  background: linear-gradient(135deg, #ffffff 0%, #EFF6FF 100%);
+}
+
+.stat-success {
+  border-color: #10B981;
+  background: linear-gradient(135deg, #ffffff 0%, #ECFDF5 100%);
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1E293B;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Status items minimalistas */
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #F8FAFC;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: background 0.2s ease;
+}
+
+.status-item:hover {
+  background: #F1F5F9;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-approved {
+  background: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.status-failed {
+  background: #EF4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.status-available {
+  background: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.status-locked {
+  background: #94A3B8;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.2);
+}
+
+.status-text {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+}
+
+/* Special activities minimalistas */
+.special-activity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+}
+
+.special-activity:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.special-activity.completed {
+  background: linear-gradient(135deg, #ffffff 0%, #ECFDF5 100%);
+  border-color: #10B981;
+}
+
+.activity-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.activity-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.activity-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1E293B;
+}
+
+.activity-credits {
+  font-size: 11px;
+  color: #64748B;
+}
+
+/* Grid de retícula más limpio */
 .reticula-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 20px;
   overflow-x: auto;
   padding-bottom: 20px;
 }
 
 .semestre-column {
-  min-width: 200px;
+  min-width: 240px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #E2E8F0;
+  transition: all 0.3s ease;
+}
+
+.semestre-column:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+  border-color: #CBD5E1;
 }
 
 .semestre-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 12px;
+  padding: 18px;
   text-align: center;
-  font-weight: bold;
-  border-radius: 8px 8px 0 0;
+  font-weight: 700;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
 }
 
 .materias-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 10px;
-  background: #f5f5f5;
-  border-radius: 0 0 8px 8px;
+  gap: 12px;
+  padding: 16px;
+  background: #FAFBFC;
   min-height: 400px;
 }
 
 .materia-card {
   background: white;
-  border-radius: 8px;
-  padding: 12px;
+  border-radius: 12px;
+  padding: 16px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border-left: 4px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
   position: relative;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .materia-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
 .materia-card.aprobada {
-  border-left-color: #4CAF50;
-  background: linear-gradient(135deg, #ffffff 0%, #e8f5e9 100%);
+  border-color: #10B981;
+  background: linear-gradient(135deg, #ffffff 0%, #ECFDF5 100%);
 }
 
 .materia-card.disponible {
-  border-left-color: #2196F3;
-  background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+  border-color: #3B82F6;
+  background: linear-gradient(135deg, #ffffff 0%, #EFF6FF 100%);
 }
 
 .materia-card.reprobada {
-  border-left-color: #f44336;
-  background: linear-gradient(135deg, #ffffff 0%, #ffebee 100%);
-  opacity: 0.85;
+  border-color: #EF4444;
+  background: linear-gradient(135deg, #ffffff 0%, #FEF2F2 100%);
 }
 
 .materia-card.bloqueada {
-  border-left-color: #9E9E9E;
-  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+  border-color: #E2E8F0;
+  background: #F8FAFC;
   opacity: 0.7;
 }
 
 .materia-codigo {
   font-size: 11px;
-  font-weight: bold;
-  color: #666;
-  margin-bottom: 4px;
+  font-weight: 700;
+  color: #64748B;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .materia-nombre {
-  font-size: 13px;
-  font-weight: 500;
-  margin-bottom: 8px;
-  line-height: 1.3;
-  min-height: 36px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  min-height: 42px;
+  color: #0F172A;
 }
 
 .materia-creditos {
-  font-size: 11px;
-  color: #888;
+  font-size: 12px;
+  color: #64748B;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .materia-check {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  color: #4CAF50;
-  font-size: 20px;
+  top: 12px;
+  right: 12px;
+  color: #10B981;
+  font-size: 22px;
 }
 
 @media (max-width: 960px) {
