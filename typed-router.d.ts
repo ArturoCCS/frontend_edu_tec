@@ -20,6 +20,7 @@ declare module 'vue-router/auto-routes' {
     '/cuestionario': RouteRecordInfo<'/cuestionario', '/cuestionario', Record<never, never>, Record<never, never>>,
     '/librosView': RouteRecordInfo<'/librosView', '/librosView', Record<never, never>, Record<never, never>>,
     '/protected_route': RouteRecordInfo<'/protected_route', '/protected_route', Record<never, never>, Record<never, never>>,
+    '/reticula': RouteRecordInfo<'/reticula', '/reticula', Record<never, never>, Record<never, never>>,
     '/simulador': RouteRecordInfo<'/simulador', '/simulador', Record<never, never>, Record<never, never>>,
   }
 }

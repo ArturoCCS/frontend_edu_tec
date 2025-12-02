@@ -66,6 +66,11 @@ const routes = [
     component: () => import('../pages/cuestionario.vue'),
   },
   {
+  path: '/reticula/',
+  name:'Reticula',
+  component: () => import('../pages/reticula.vue'),
+},
+  {
     path: '/about',
     component: BlogForm,
   }
