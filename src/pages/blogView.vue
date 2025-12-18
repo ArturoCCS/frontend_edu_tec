@@ -14,12 +14,12 @@
     <aside class="page-sidebar">
       <PageSidebar :secciones="capituloSeleccionado?.secciones || []" />
     </aside>
-<!-- 
+
     <ChatbotWidget
       :blog="blog"
       :capitulos="capitulos"
       :capitulo="capituloSeleccionado"
-    /> -->
+    />
   </div>
 </template>
 

@@ -112,16 +112,6 @@
             </div>
           </div>
 
-          <!-- <div class="group-block">
-            <div class="group-label">Tags libres (palabras clave)</div>
-            <TagInput
-              v-model="blog.freeTags"
-              :suggestions="tagSuggestions"
-              :max="8"
-              placeholder="Escribe y Enter/Tab…"
-            />
-            <div class="muted tiny">Máximo 8. Se normalizan a minúsculas y sin acentos.</div>
-          </div> -->
         </form>
       
       </section>
@@ -521,7 +511,6 @@ async function guardarBlog() {
   align-items: flex-start;
   min-height: 100vh;
 }
-.blog-wizard-content {}
 .blog-wizard-form .blog-form {
   width: 100%;
   max-width: 820px;

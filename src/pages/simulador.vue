@@ -1,8 +1,8 @@
 <template>
-    <h1>Hola mundo</h1>
-    <DataUserForm/>
+    <SimNarrative/>
 </template>
 
 <script setup>
-import DataUserForm from '@/components/Sim/DataUserForm.vue';
+import SimNarrative from '@/components/Views/SimNarrative.vue';
+
 </script>

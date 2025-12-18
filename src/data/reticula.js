@@ -1,5 +1,5 @@
 export const materiasData = [
-  // Semestre 1
+
   {
     id: 'ACF-0901',
     nombre: 'Cálculo Diferencial',
@@ -61,7 +61,6 @@ export const materiasData = [
     color: '#9C27B0'
   },
 
-  // Semestre 2
   {
     id: 'ACF-0902',
     nombre: 'Cálculo Integral',
@@ -123,7 +122,6 @@ export const materiasData = [
     color: '#4CAF50'
   },
 
-  // Semestre 3
   {
     id: 'ACF-0904',
     nombre: 'Cálculo Vectorial',
@@ -185,7 +183,6 @@ export const materiasData = [
     color: '#00BCD4'
   },
 
-  // Semestre 4
   {
     id: 'ACF-0905',
     nombre: 'Ecuaciones Diferenciales',
@@ -247,7 +244,6 @@ export const materiasData = [
     color: '#FF5722'
   },
 
-  // Semestre 5
   {
     id: 'SCD-1015',
     nombre: 'Lenguajes y Autómatas I',
@@ -309,7 +305,6 @@ export const materiasData = [
     color: '#FF5722'
   },
 
-  // Semestre 6
   {
     id: 'SCD-1016',
     nombre: 'Lenguajes y Autómatas II',
@@ -371,7 +366,6 @@ export const materiasData = [
     color: '#2196F3'
   },
 
-  // Semestre 7
   {
     id: 'SCC-1019',
     nombre: 'Programación Lógica y Funcional',
@@ -443,7 +437,6 @@ export const materiasData = [
     color: '#FFC107'
   },
 
-  // Semestre 8
   {
     id: 'SCC-1012',
     nombre: 'Inteligencia Artificial',
@@ -505,7 +498,6 @@ export const materiasData = [
     color: '#000000'
   },
 
-  // Semestre 9
   {
     id: 'MCD-2104',
     nombre: 'Implementación de Aplicaciones de Cómputo Móvil',
@@ -537,7 +529,6 @@ export const materiasData = [
     color: '#9E9E9E'
   },
 
-  // Actividades Complementarias (Se pueden realizar en semestres 1-6)
   {
     id: 'ACT-COMP',
     nombre: 'Actividades Complementarias',
@@ -551,7 +542,6 @@ export const materiasData = [
     descripcion: 'Actividades culturales o deportivas. Se recomienda completar en los primeros 6 semestres.'
   },
 
-  // Servicio Social (Se puede realizar en semestre 7 u 8)
   {
     id: 'SERVICIO-SOCIAL',
     nombre: 'Servicio Social',

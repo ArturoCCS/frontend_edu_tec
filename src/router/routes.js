@@ -10,7 +10,6 @@ const routes = [
   {
     path: '/',
     component: () => import('../pages/index.vue'),
-    
   },
   {
     path: '/register',
@@ -58,22 +57,25 @@ const routes = [
   {
     path: '/simulador/',
     name:'Simulador',
-    component: () => import('../pages/simulador.vue'),
+    component: () => import('@/components/Views/SimNarrative.vue'),
+    meta: { requiresAuth: true, requiresPsych: true }
   },
   {
     path: '/cuestionario/',
     name:'Cuestionario',
     component: () => import('../pages/cuestionario.vue'),
+    meta: { requiresAuth: true }
   },
   {
-  path: '/reticula/',
-  name:'Reticula',
-  component: () => import('../pages/reticula.vue'),
-},
+    path: '/reticula/',
+    name:'Reticula',
+    component: () => import('../pages/reticula.vue'),
+    meta: { requiresAuth: true, requiresPsych: true }
+  },
   {
     path: '/about',
     component: BlogForm,
-  }
-]
+  },
+];
 
 export default routes;
